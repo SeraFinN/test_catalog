@@ -1,28 +1,32 @@
-<table>
-<tr>
-    {% for items in item_list %}
+{% if item_list %}
+    <table>
+        {% for row in item_list %}
+            <tr>
+            {% for item in row %}
+                <td>
+                    {% include "item.html" %}
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
 
-{#        {% for item in items %}#}
-            <td>
-                {{ items.name }}
-            </td>
-{#        {% endfor %}#}
-    {% endfor %}
-    <tr>
-</table>
 
-<div class="pagination">
-    <span class="step-links">
-        {% if item_list.has_previous %}
-            <a href="?page={{ item_list.previous_page_number }}">previous</a>
-        {% endif %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if item_list.has_previous %}
+                <a href="?page={{ item_list.previous_page_number }}">&lt;&lt;&lt;Назад</a>
+            {% endif %}
 
-        <span class="current">
-            Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+            <span class="current">
+                Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+            </span>
+
+            {% if item_list.has_next %}
+                <a href="?page={{ item_list.next_page_number }}">Вперед&gt;&gt;&gt;</a>
+            {% endif %}
         </span>
-
-        {% if item_list.has_next %}
-            <a href="?page={{ item_list.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
+{% else %}
+    <div>No such elements</div>
+{% endif %}

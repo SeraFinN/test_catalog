@@ -1,15 +1,15 @@
-__author__ = 'serafinn'
 from django import template
 from testapp.models import Categories
 register = template.Library()
 
 
-@register.inclusion_tag('nav.html', takes_context=True)
-def nav(context):
-    request = context['request']
-    # address = request.session['address']
+@register.inclusion_tag('nav.html')
+def nav():
     categories = Categories.objects.all()
-    # l = [y for x in categories for y in x.url.split('/') if y]
     # assert False, l
-    categories = sorted(categories, key=lambda x: (x.url,) + tuple(y[0] for y in x.url.split('/') if y and x.level > 1))
-    return {'categoty_list': categories, 'address': request.path}
+    categories = sorted(
+        categories,
+        key=lambda category: (category.fullUrl,)
+                             + tuple(sub[0] for sub in category.fullUrl.split('/') if sub and category.level > 1)
+    )
+    return {'categoty_list': categories}

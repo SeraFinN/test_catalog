@@ -1,24 +1,54 @@
+# coding=utf-8
+
 from django.db import models
+from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError
+from testapp.validators import SubCategoryURLValidator
 
-# Create your models here.
 
-class Publisher(models.Model):
-    name = models.CharField(max_length=30)
-    address = models.CharField(max_length=50)
-    city = models.CharField(max_length=60)
-    state_province = models.CharField(max_length=30)
-    country = models.CharField(max_length=50)
-    website = models.URLField()
+class Images(models.Model):
+    image = models.ImageField(upload_to='tmp')
 
-class Author(models.Model):
-    salutation = models.CharField(max_length=10)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=40)
-    email = models.EmailField()
-    headshot = models.ImageField(upload_to='/tmp')
 
-class Book(models.Model):
-    title = models.CharField(max_length=100)
-    authors = models.ManyToManyField(Author)
-    publisher = models.ForeignKey(Publisher)
-    publication_date = models.DateField()
+class Categories(models.Model):
+    name = models.CharField('Название', max_length=100)
+    level = models.IntegerField(editable=False, validators=[MaxValueValidator(3)]) # validator don't work with calc field?
+    parent = models.ForeignKey('self', blank=True, null=True,)
+    fullUrl = models.CharField(editable=False, max_length=255)
+    subCategoryUrl = models.CharField(max_length=20, validators=[SubCategoryURLValidator()])
+    default_image = models.ForeignKey(Images, blank=True, null=True) # validator for control that root category have image
+
+    def save(self, *args, **kwargs):
+        self.subCategoryUrl = self.subCategoryUrl.lower()
+        if self.parent:
+            #category = Categories.objects.get(id=self.parent.id)
+            self.fullUrl = self.parent.fullUrl + self.subCategoryUrl + '/'
+            self.default_image = self.parent.default_image
+        else:
+            self.fullUrl = '/' + self.subCategoryUrl + '/'
+        self.level = len([subCategory for subCategory in self.fullUrl.split('/') if subCategory])
+        if self.level > 3:
+            raise ValidationError
+        super(Categories, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name + ' | ' + self.fullUrl + ' | ' + str(self.level)
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Categories, blank=True, null=True)
+    count = models.IntegerField()
+    price = models.IntegerField()
+    image = models.ForeignKey(Images, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.image:
+            self.image = self.category.default_image
+        super(Product, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name
+
+
+
