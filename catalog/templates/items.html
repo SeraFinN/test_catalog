@@ -1,0 +1,28 @@
+<table>
+<tr>
+    {% for items in item_list %}
+
+{#        {% for item in items %}#}
+            <td>
+                {{ items.name }}
+            </td>
+{#        {% endfor %}#}
+    {% endfor %}
+    <tr>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if item_list.has_previous %}
+            <a href="?page={{ item_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+        </span>
+
+        {% if item_list.has_next %}
+            <a href="?page={{ item_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>

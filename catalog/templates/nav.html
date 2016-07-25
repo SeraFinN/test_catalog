@@ -1,0 +1,8 @@
+<div class='nav'>
+{#    {{ address }}#}
+    {% for category in categoty_list %}
+        <div class='level_{{ category.level }}'>
+            <a href='{{ category.url }}'>{{ category.name }} </a>
+        </div>
+    {% endfor %}
+</div>
