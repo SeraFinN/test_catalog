@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from testapp.views import bd_test, product_list
+from testapp.views import product_list
 
 admin.autodiscover()
 
@@ -14,8 +14,12 @@ urlpatterns = patterns((),
                        # ('^bd/$', bd_test),
                        # (r'^time/plus/(\d{1,2})/$', hours_ahead),
                        (r'^admin/', include(admin.site.urls)),
-                       (r'^monitors/([(\w*)/]*)(\?page=\d{1,})?$', product_list),
-                       (r'^cpu/([(\w*)/]*)(\?page=\d{1,})?$', product_list),
+
+                       # (r'^monitors/([(\w*)/]*)(\?page=\d+)?$', product_list),
+                       # (r'^cpu/([(\w*)/]*)(\?page=\d+)?$', product_list),
+
+
+                       (r'^([\w-]*)/?([\w-]*)/?([\w-]*)/?(\?page=\d+)?$', product_list),
                        # (r'^monitors/((\d{1,2})/)*$', monitors),
                        # (r'^cpu/(\d{1,2})/$', monitors)
                        # (r'^cpu/((\w*)/)*$', product_list),

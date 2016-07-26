@@ -1,37 +1,44 @@
 # coding=utf-8
 
 from django.db import models
-from django.core.validators import MaxValueValidator
-from django.core.exceptions import ValidationError
-from testapp.validators import SubCategoryURLValidator
+
+from django.template.defaultfilters import slugify
 
 
 class Images(models.Model):
-    image = models.ImageField(upload_to='tmp')
+    image = models.ImageField(upload_to='pics')
 
 
 class Categories(models.Model):
-    name = models.CharField('Название', max_length=100)
-    level = models.IntegerField(editable=False, validators=[MaxValueValidator(3)]) # validator don't work with calc field?
-    parent = models.ForeignKey('self', blank=True, null=True,)
-    fullUrl = models.CharField(editable=False, max_length=255)
-    subCategoryUrl = models.CharField(max_length=20, validators=[SubCategoryURLValidator()])
-    default_image = models.ForeignKey(Images, blank=True, null=True) # validator for control that root category have image
+    name = models.CharField(max_length=100)
+    parent = models.ForeignKey('self', blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True)
+    default_image = models.ForeignKey(Images, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.subCategoryUrl = self.subCategoryUrl.lower()
+        if not self.slug:
+            self.slug = slugify(self.name)
         if self.parent:
-            self.fullUrl = self.parent.fullUrl + self.subCategoryUrl + '/'
             self.default_image = self.parent.default_image
-        else:
-            self.fullUrl = '/' + self.subCategoryUrl + '/'
-        self.level = len([subCategory for subCategory in self.fullUrl.split('/') if subCategory])
-        if self.level > 3:
-            raise ValidationError
         super(Categories, self).save(*args, **kwargs)
 
+    # @models.permalink
+    def get_absolute_url(self):
+        current_category = self
+        url = '/'
+        while current_category:
+            if current_category.slug:
+                url = '/' + current_category.slug + url
+                #url.append(str(current_category.slug))
+                current_category = current_category.parent
+
+        return url
+
+    def get_level(self):
+        return len(filter(bool, self.get_absolute_url().split('/')))
+
     def __unicode__(self):
-        return self.name + ' | ' + self.fullUrl + ' | ' + str(self.level)
+        return str(self.id) + ' | ' + self.name + ' | ' + self.slug + ' | ' + str(self.get_level()) + ' | ' + self.get_absolute_url()
 
 
 class Product(models.Model):
@@ -48,6 +55,3 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-
