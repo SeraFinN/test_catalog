@@ -21,7 +21,6 @@ class Categories(models.Model):
     def save(self, *args, **kwargs):
         self.subCategoryUrl = self.subCategoryUrl.lower()
         if self.parent:
-            #category = Categories.objects.get(id=self.parent.id)
             self.fullUrl = self.parent.fullUrl + self.subCategoryUrl + '/'
             self.default_image = self.parent.default_image
         else:

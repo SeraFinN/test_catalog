@@ -1,12 +1,11 @@
 <div class='nav'>
-{#    {{ address }}#}
     {% for category in categoty_list %}
         <div class='level_{{ category.level }}'>
-{#            {% ifequal request.path category.url %}#}
+            {% ifnotequal current_path category.fullUrl %}
                 <a href='{{ category.fullUrl }}'>{{ category.name }} </a>
-{#            {% else %}#}
-{#                {{ category.name }}#}
-{#            {% endifequal %}#}
+            {% else %}
+                {{ category.name }}
+            {% endifnotequal %}
         </div>
     {% endfor %}
 </div>

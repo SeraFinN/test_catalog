@@ -1,12 +1,13 @@
+{% load list_to_table %}
 {% if item_list %}
     <table>
-        {% for row in item_list %}
+        {% for row in item_list|list_to_table %}
             <tr>
-            {% for item in row %}
-                <td>
-                    {% include "item.html" %}
-                </td>
-            {% endfor %}
+                {% for item in row %}
+                    <td>
+                        {% include "item.html" %}
+                    </td>
+                {% endfor %}
             </tr>
         {% endfor %}
     </table>
@@ -19,7 +20,7 @@
             {% endif %}
 
             <span class="current">
-                Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+                {{ item_list.number }} из {{ item_list.paginator.num_pages }}
             </span>
 
             {% if item_list.has_next %}
