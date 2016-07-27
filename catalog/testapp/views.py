@@ -6,11 +6,9 @@ from testapp.models import Product, Categories
 
 
 def main(request, **params):
-    template = "child_category_list.html"
-    has_child = True
-
     category_tree = Categories.objects.all()
     category_tree = sorted(category_tree, key=lambda cat: (cat.get_absolute_url()))
+
     current_category = None
     slug = params['slug']
     if slug:
@@ -20,25 +18,21 @@ def main(request, **params):
             raise Http404
         if not request.path == current_category.get_absolute_url():
             raise Http404
-        categories = Categories.objects.filter(id__in=current_category.get_direct_child_ids())
-        has_child = bool(categories)
+        categories = Categories.objects.filter(id__in=current_category.get_all_level_child_ids() + [current_category.id])
     else:
-        categories = Categories.objects.filter(parent__isnull=True)
+        categories = Categories.objects.all()
 
-    items = []
-    if not has_child:
-        template = 'product_list.html'
-        products = Product.objects.filter(category=current_category.id)
+    products = Product.objects.filter(category__in=categories)
 
-        paginator = Paginator(products, 12)
-        page = request.GET.get('page')
+    paginator = Paginator(products, 12)
+    page = request.GET.get('page')
 
-        try:
-            items = paginator.page(page)
-        except PageNotAnInteger:
-            items = paginator.page(1)
-        except EmptyPage:
-            items = paginator.page(paginator.num_pages)
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
 
     context = dict()
     context['category_list'] = category_tree
@@ -46,4 +40,17 @@ def main(request, **params):
     context['item_list'] = items
     context['categories'] = categories
 
-    return render_to_response(template, context)
+    return render_to_response('product_list.html', context)
+
+
+def product_details(request, **params):
+    category_tree = Categories.objects.all()
+    category_tree = sorted(category_tree, key=lambda cat: (cat.get_absolute_url()))
+
+    if not params:
+        raise Http404
+    try:
+        product = Product.objects.get(id=params['id'])
+        return render_to_response('product_details.html', {'product': product, 'category_list': category_tree})
+    except Product.DoesNotExist:
+        raise Http404
