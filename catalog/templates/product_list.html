@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-{% load items %}
-
 {% block content %}
     <div id="content">
-        {% items %}
+        {% include "items.html" %}
     </div>
 {% endblock %}

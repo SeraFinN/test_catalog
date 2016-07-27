@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="content">
+        {% if current_category %}
+            In category: {{ current_category.name }}
+        {% else %}
+            Available category:
+        {% endif %}
+        <table>
+            <tr>
+                {% for category in categories %}
+                    <td width="200px">
+                        <a href='{{ category.get_absolute_url }}'>{{ category.name }} </a>
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+{% endblock %}

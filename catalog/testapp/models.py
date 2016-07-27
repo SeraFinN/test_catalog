@@ -29,7 +29,6 @@ class Categories(models.Model):
         while current_category:
             if current_category.slug:
                 url = '/' + current_category.slug + url
-                #url.append(str(current_category.slug))
                 current_category = current_category.parent
 
         return url
@@ -37,8 +36,23 @@ class Categories(models.Model):
     def get_level(self):
         return len(filter(bool, self.get_absolute_url().split('/')))
 
+    def get_direct_child_ids(self):
+        childs = Categories.objects.filter(parent=self.id)
+        return [child.id for child in childs]
+
+    def get_all_level_child_ids(self):
+        ids = []
+        childs = Categories.objects.filter(parent=self.id)
+        ids.append(self)
+        for child in childs:
+            # ids.append(child.id)
+            ids += child.get_all_level_child_ids()
+        return ids
+
     def __unicode__(self):
-        return str(self.id) + ' | ' + self.name + ' | ' + self.slug + ' | ' + str(self.get_level()) + ' | ' + self.get_absolute_url()
+        test_name = str(self.id) + ' | ' + self.name + ' | ' + self.slug + ' | '
+        test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
+        return test_name
 
 
 class Product(models.Model):
