@@ -11,12 +11,14 @@ def main(request, **params):
 
     category_tree = Categories.objects.all()
     category_tree = sorted(category_tree, key=lambda cat: (cat.get_absolute_url()))
-
     current_category = None
     slug = params['slug']
     if slug:
-        current_category = Categories.objects.get(slug__iexact=slug)
-        if not current_category.DoesNotExist or not request.path == current_category.get_absolute_url():
+        try:
+            current_category = Categories.objects.get(slug__iexact=slug)
+        except Categories.DoesNotExist:
+            raise Http404
+        if not request.path == current_category.get_absolute_url():
             raise Http404
         categories = Categories.objects.filter(id__in=current_category.get_direct_child_ids())
         has_child = bool(categories)

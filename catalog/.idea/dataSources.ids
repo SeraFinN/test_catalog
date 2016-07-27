@@ -2747,15 +2747,15 @@
     <table name="testapp_categories" schema="public" catalog="catalogdb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndGVzdGFwcF9jYXRlZ29yaWVzX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
       <column name="name" sqlType="varchar" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <column name="level" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="parent_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="url" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="slug" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="default_image_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="testapp_categories_pkey" columns="id"/>
       <foreign-key name="parent_id_refs_id_7a48ab89" columns="parent_id" ref-table="testapp_categories" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="testapp_categories_default_image_id_fkey" columns="default_image_id" ref-table="testapp_images" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="parent_id_refs_id_7a48ab89" table="testapp_categories" schema="public" catalog="catalogdb" columns="parent_id"/>
       <exported-key name="testapp_product_category_id_fkey" table="testapp_product" schema="public" catalog="catalogdb" columns="category_id"/>
+      <index name="testapp_categories_slug_key" unique="true" columns="slug"/>
       <index name="testapp_categories_default_image_id" unique="false" columns="default_image_id"/>
       <index name="testapp_categories_parent_id" unique="false" columns="parent_id"/>
     </table>

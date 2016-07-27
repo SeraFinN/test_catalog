@@ -8,6 +8,9 @@ from django.template.defaultfilters import slugify
 class Images(models.Model):
     image = models.ImageField(upload_to='pics')
 
+    def __unicode__(self):
+        return str(self.id)
+
 
 class Categories(models.Model):
     name = models.CharField(max_length=100)
@@ -18,7 +21,14 @@ class Categories(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        if self.parent:
+
+        old_category = Categories.objects.filter(id=self.id)
+        if old_category:
+            old_image = old_category[0].default_image
+            child_ids = self.get_all_level_child_ids()
+            Categories.objects.filter(id__in=child_ids, default_image=old_image).update(default_image=self.default_image)
+
+        if self.parent and not self.default_image:
             self.default_image = self.parent.default_image
         super(Categories, self).save(*args, **kwargs)
 
@@ -43,9 +53,9 @@ class Categories(models.Model):
     def get_all_level_child_ids(self):
         ids = []
         childs = Categories.objects.filter(parent=self.id)
-        ids.append(self)
+        #ids.append(self.id)
         for child in childs:
-            # ids.append(child.id)
+            ids.append(child.id)
             ids += child.get_all_level_child_ids()
         return ids
 
@@ -53,6 +63,9 @@ class Categories(models.Model):
         test_name = str(self.id) + ' | ' + self.name + ' | ' + self.slug + ' | '
         test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
         return test_name
+
+    class Meta:
+        unique_together = ("id", "default_image")
 
 
 class Product(models.Model):
@@ -62,10 +75,11 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.ForeignKey(Images, blank=True, null=True)
 
-    def save(self, *args, **kwargs):
+    def get_image(self):
         if not self.image:
-            self.image = self.category.default_image
-        super(Product, self).save(*args, **kwargs)
+            return self.category.default_image.image.url
+        else:
+            return self.image.image.url
 
     def __unicode__(self):
         return self.name
