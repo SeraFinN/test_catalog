@@ -47,15 +47,6 @@ class Categories(models.Model):
     def get_level(self):
         return len(filter(bool, self.get_absolute_url().split('/')))
 
-    def get_all_level_child_ids(self):
-        ids = []
-        childs = Categories.objects.filter(parent=self.id)
-        # ids.append(self.id)
-        for child in childs:
-            ids.append(child.id)
-            ids += child.get_all_level_child_ids()
-        return ids
-
     def get_breadcrumbs(self):
         breadcrumbs = []
         current_category = self
@@ -66,7 +57,7 @@ class Categories(models.Model):
         return breadcrumbs
 
     def __unicode__(self):
-        test_name = str(self.id) + ' | ' + self.slug + ' | '
+        test_name = str(self.id) + ' | ' + self.name + ' | '
         # test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
         return test_name
 
@@ -88,4 +79,4 @@ class Product(models.Model):
         return str(self.id) + ' | ' + self.name
 
     def get_absolute_url(self):
-        return "/product/" + str(self.id)#reverse('product_details', args=[self.id])#
+        return "/product/" + str(self.id)
