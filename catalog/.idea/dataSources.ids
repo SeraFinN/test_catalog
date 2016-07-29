@@ -2755,6 +2755,7 @@
       <foreign-key name="testapp_categories_default_image_id_fkey" columns="default_image_id" ref-table="testapp_images" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="parent_id_refs_id_7a48ab89" table="testapp_categories" schema="public" catalog="catalogdb" columns="parent_id"/>
       <exported-key name="testapp_product_category_id_fkey" table="testapp_product" schema="public" catalog="catalogdb" columns="category_id"/>
+      <index name="testapp_categories_id_default_image_id_key" unique="true" columns="id,default_image_id"/>
       <index name="testapp_categories_slug_key" unique="true" columns="slug"/>
       <index name="testapp_categories_default_image_id" unique="false" columns="default_image_id"/>
       <index name="testapp_categories_parent_id" unique="false" columns="parent_id"/>
@@ -2796,6 +2797,7 @@
       <column name="category_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="count" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="price" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
       <column name="image_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="testapp_product_pkey" columns="id"/>
       <foreign-key name="testapp_product_category_id_fkey" columns="category_id" ref-table="testapp_categories" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>

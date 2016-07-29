@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls import *
 from django.conf import settings
 from django.conf.urls import patterns, include
 from django.conf.urls.static import static
@@ -11,7 +12,6 @@ admin.autodiscover()
 # Uncomment the next two lines to enable the admin:
 urlpatterns = patterns((), )
 urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 urlpatterns += patterns((),
 
                         # ('^hello/$', hello),
@@ -25,7 +25,14 @@ urlpatterns += patterns((),
                         # (r'^$', index),
 
                         # (r'^((?P<slug>[\w-]+)/?)*$', main),
-                        (r'^product/(?P<id>\d+)/?$', product_details),
+                        url(r'^product/(?P<id>\d+)/?$', product_details, name='product_details'),
+
+
+                        (r'^search/\?q=\d+$', main),
+                        # (r'^search/?q=(?P<q>\w+)*(\?page=(?P<page>\d+))?$', main),
+
+
+                        # (r'^product/(?P<id>\d+)/?$', product_details),
                         (r'^((?P<slug>[\w-]+)/?)*(\?page=(?P<page>\d+))?$', main),
 
                         # (r'^([\w-]*)/?([\w-]*)/?([\w-]*)/?(\?page=\d+)?$', product_list),
@@ -47,6 +54,7 @@ urlpatterns += patterns((),
                         # Uncomment the next line to enable the admin:
                         # url(r'^admin/', include(admin.site.urls)),
                         )
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 # from django.contrib import admin
 # admin.autodiscover()
 

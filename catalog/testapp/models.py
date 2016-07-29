@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.core.exceptions import ValidationError
 
 
 class Images(models.Model):
@@ -13,45 +14,27 @@ class Images(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', blank=True, null=True)
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='category')
     slug = models.SlugField(unique=True, blank=True)
     default_image = models.ForeignKey(Images, blank=True, null=True)
+
+    def get_image(self):
+        if not self.default_image:
+            category = self.parent
+            while not category.default_image:
+                category = category.parent
+            return category.default_image
+        return self.default_image
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-
-        old_category = Categories.objects.filter(id=self.id)
-        if old_category:
-            old_image = old_category[0].default_image
-            child_ids = self.get_all_level_child_ids()
-            Categories.objects.filter(id__in=child_ids, default_image=old_image).update(default_image=self.default_image)
-
-        # try:
-        #     old_category = Categories.objects.get(id=self.id)
-        #     assert False, old_category.parent
-        #     if old_category:
-        #         child_ids = self.get_all_level_child_ids()
-        #
-        #         old_image = old_category.default_image
-        #         if old_category.parent != self.parent:
-        #             if self.parent:
-        #                 image = self.parent.default_image
-        #             else:
-        #                 image = self.default_image
-        #             Categories.objects.filter(id__in=child_ids).update(default_image=image)
-        #         else:
-        #             be_changes = Categories.objects.filter(id__in=child_ids, default_image=old_image)
-        #             be_changes.update(default_image=self.default_image)
-        # except Categories.DoesNotExist:
-        #     pass
-
-
-        if self.parent and not self.default_image:
-            self.default_image = self.parent.default_image
         super(Categories, self).save(*args, **kwargs)
 
-    # @models.permalink
+    def clean(self):
+        if not self.parent and not self.default_image:
+            raise ValidationError('Root catalog must have image')
+
     def get_absolute_url(self):
         current_category = self
         url = '/'
@@ -59,7 +42,6 @@ class Categories(models.Model):
             if current_category.slug:
                 url = '/' + current_category.slug + url
                 current_category = current_category.parent
-
         return url
 
     def get_level(self):
@@ -74,13 +56,19 @@ class Categories(models.Model):
             ids += child.get_all_level_child_ids()
         return ids
 
-    def __unicode__(self):
-        test_name = str(self.id) + ' | ' + self.name + ' | ' + self.slug + ' | '
-        test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
-        return test_name
+    def get_breadcrumbs(self):
+        breadcrumbs = []
+        current_category = self
+        while current_category:
+            if current_category.slug:
+                breadcrumbs = [(current_category.name, current_category.get_absolute_url())] + breadcrumbs
+                current_category = current_category.parent
+        return breadcrumbs
 
-    class Meta:
-        unique_together = ("id", "default_image")
+    def __unicode__(self):
+        test_name = str(self.id) + ' | ' + self.slug + ' | '
+        # test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
+        return test_name
 
 
 class Product(models.Model):
@@ -93,13 +81,11 @@ class Product(models.Model):
 
     def get_image(self):
         if not self.image:
-            return self.category.default_image.image.url
-        else:
-            return self.image.image.url
+            return self.category.get_image()
+        return self.image
 
     def __unicode__(self):
         return str(self.id) + ' | ' + self.name
 
-    # @models.permalink
     def get_absolute_url(self):
-        return "/product/" + str(self.id)
+        return "/product/" + str(self.id)#reverse('product_details', args=[self.id])#

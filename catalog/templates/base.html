@@ -20,14 +20,14 @@
         }
 
         #sidebar {
-            border: dashed 1px;
+{#            border: dashed 1px;#}
             float: left;
             width: 30%;
             height: 500px;
         }
 
         #content {
-            border: dashed 1px;
+{#            border: dashed 1px;#}
             height: 100%;
         }
 
@@ -45,6 +45,22 @@
         <div id="sidebar">
             {% include "nav.html" %}
         </div>
+        {#|unordered_list#}
+        {#        <div id="test">{{ test_data }}</div>#}
+        {% block breadcrumbs %}
+            {% if is_main %}
+                Главная
+            {% else %}
+                <a href="/">Главная</a>
+            {% endif %}
+
+        {% endblock %}
+
+        <form action="/search/" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+
         {% block content %}
         {% endblock %}
     </div>

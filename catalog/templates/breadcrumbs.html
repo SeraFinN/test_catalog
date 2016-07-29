@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -9,11 +9,4 @@
             <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
         {% endif %}
     {% endfor %}
-{% endblock %}
-
-{#{% include "breadcrumbs.html" %}#}
-{% block content %}
-    <div id="content">
-        {% include "items.html" %}
-    </div>
 {% endblock %}
