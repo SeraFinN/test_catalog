@@ -1,4 +1,7 @@
 {% load list_to_table %}
+{% load save_get_param %}
+
+{#{{ request }}#}
 
 {% if item_list %}
     <table>
@@ -16,7 +19,7 @@
     <div class="pagination">
         <span class="step-links">
             {% if item_list.has_previous %}
-                <a href="?page={{ item_list.previous_page_number }}">&lt;&lt;&lt;Назад</a>
+                <a href="?{{ item_list.previous_page_number|save_get_param:request  }}">&lt;&lt;&lt;Назад</a>
             {% endif %}
 
             <span class="current">
@@ -24,7 +27,7 @@
             </span>
 
             {% if item_list.has_next %}
-                <a href="?page={{ item_list.next_page_number }}">Вперед&gt;&gt;&gt;</a>
+                <a href="?{{ item_list.next_page_number|save_get_param:request }}">Вперед&gt;&gt;&gt;</a>
             {% endif %}
         </span>
     </div>

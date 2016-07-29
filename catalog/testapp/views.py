@@ -125,7 +125,7 @@ def main(request, **params):
     context['item_list'] = items
     context['breadcrumbs'] = breadcrumbs
     context['is_main'] = is_main
-    # context['test_data'] = list(test_data)
+    context['request'] = request
 
     return render_to_response('product_list.html', context)
 
