@@ -1,20 +1,10 @@
 {% extends "base.html" %}
 
+{% block title %} {{ product.name }} {% endblock %}
 
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% for category_link in breadcrumbs %}
-        {% if forloop.last %}
-            / {{ category_link.0 }}
-        {% else %}
-            <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
 {% block content %}
     <div id="content">
-        <table border="1">
+        <table border="0">
             <tr>
                 <td><img src="{{ product.get_image.image.url }}" width="100" height="100"/></td>
                 <td><h1>{{ product.name }}</h1></td>

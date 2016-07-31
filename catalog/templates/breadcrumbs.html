@@ -1,12 +1,12 @@
-
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% for category_link in breadcrumbs %}
-        {% if forloop.last %}
-            / {{ category_link.0 }}
-        {% else %}
-            <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
+<div id="breadcrumbs">
+{% if not is_main %}
+    <a href="/">Главная</a>
+{% endif %}
+{% for category_link in breadcrumbs %}
+    {% if forloop.last %}
+        / {{ category_link.0 }}
+    {% else %}
+        <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
+    {% endif %}
+{% endfor %}
+</div>

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include
 from django.conf.urls.static import static
 
-from testapp.views import main, product_details
+from testapp.views import product_list, product_details
 
 admin.autodiscover()
 
@@ -28,12 +28,12 @@ urlpatterns += patterns((),
                         url(r'^product/(?P<id>\d+)/?$', product_details, name='product_details'),
 
 
-                        (r'^search/\?q=\d+$', main),
+                        (r'^search/\?q=\d+$', product_list),
                         # (r'^search/?q=(?P<q>\w+)*(\?page=(?P<page>\d+))?$', main),
 
 
                         # (r'^product/(?P<id>\d+)/?$', product_details),
-                        (r'^((?P<slug>[\w-]+)/?)*(\?page=(?P<page>\d+))?$', main),
+                        (r'^((?P<slug>[\w-]+)/?)*(\?page=(?P<page>\d+))?$', product_list),
 
                         # (r'^([\w-]*)/?([\w-]*)/?([\w-]*)/?(\?page=\d+)?$', product_list),
                         # (r'^monitors/((\d{1,2})/)*$', monitors),

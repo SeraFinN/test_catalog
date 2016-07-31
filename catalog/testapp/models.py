@@ -15,7 +15,7 @@ class Images(models.Model):
 class Categories(models.Model):
     name = models.CharField(max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='category')
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True)
     default_image = models.ForeignKey(Images, blank=True, null=True)
 
     def get_image(self):
@@ -32,17 +32,14 @@ class Categories(models.Model):
         super(Categories, self).save(*args, **kwargs)
 
     def clean(self):
+        if self.get_level() > 3:
+            raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
             raise ValidationError('Root catalog must have image')
 
     def get_absolute_url(self):
         current_category = self
         url = '/'
-        # bread = self.get_breadcrumbs()
-        # for slug in bread:
-        #     url = url + "/" + slug[2]
-        # assert False, url
-        # url = []
         while current_category:
             if current_category.slug:
                 url = '/' + current_category.slug + url
@@ -50,7 +47,7 @@ class Categories(models.Model):
         return url
 
     def get_level(self):
-        return len(filter(bool, self.get_absolute_url().split('/')))
+        return len(self.get_breadcrumbs())
 
     def get_breadcrumbs(self):
         breadcrumbs = []
@@ -63,7 +60,7 @@ class Categories(models.Model):
         return breadcrumbs
 
     def __unicode__(self):
-        test_name = str(self.id) + ' | ' + self.name + ' | '
+        test_name = str(self.id) + ' | ' + self.name + ' | ' + str(self.get_level())
         # test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
         return test_name
 

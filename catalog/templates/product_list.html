@@ -1,17 +1,5 @@
 {% extends "base.html" %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% for category_link in breadcrumbs %}
-        {% if forloop.last %}
-            / {{ category_link.0 }}
-        {% else %}
-            <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
-
-{#{% include "breadcrumbs.html" %}#}
 {% block content %}
     <div id="content">
         {% include "items.html" %}
