@@ -2,12 +2,35 @@ from django.http import Http404
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from testapp.models import Product, Categories
-
+from .models import Product, Categories
+from .formater import prepare_data
 
 def main(request, **params):
     category_tree = Categories.objects.all()
-    category_tree = sorted(category_tree, key=lambda cat: (cat.get_absolute_url()))
+    # category_tree = sorted(category_tree, key=lambda cat: (cat.get_absolute_url()))
+
+    categories_dict = category_tree.values('id', 'parent_id', 'name')
+    # parent_map = defaultdict(list)
+    # for item in items:
+    #     parent_map[item['parent_id']].append(item)
+    #
+    # def tree_to_list(root):
+    #     l = []
+    #     for item in sorted(parent_map[root]):
+    #         l.append(item)
+    #         sub_list = tree_to_list(item['id'])
+    #         if sub_list:
+    #             l.append(sub_list)
+    #     return l
+    #         # if sub_list:
+    #             # assert False, sub_list
+    #             # return l + [sub_list]
+    #     # assert False, l
+
+
+
+    # assert False, prepare_data(items)
+
     current_category = None
     breadcrumbs = []
     is_main = True
@@ -49,6 +72,7 @@ def main(request, **params):
     context['breadcrumbs'] = breadcrumbs
     context['is_main'] = is_main
     context['request'] = request
+    context['test_data'] = prepare_data(categories_dict)
 
     return render_to_response('product_list.html', context)
 

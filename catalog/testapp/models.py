@@ -38,6 +38,11 @@ class Categories(models.Model):
     def get_absolute_url(self):
         current_category = self
         url = '/'
+        # bread = self.get_breadcrumbs()
+        # for slug in bread:
+        #     url = url + "/" + slug[2]
+        # assert False, url
+        # url = []
         while current_category:
             if current_category.slug:
                 url = '/' + current_category.slug + url
@@ -52,7 +57,8 @@ class Categories(models.Model):
         current_category = self
         while current_category:
             if current_category.slug:
-                breadcrumbs = [(current_category.name, current_category.get_absolute_url())] + breadcrumbs
+                breadcrumbs_tuple = (current_category.name, current_category.get_absolute_url(), current_category.slug)
+                breadcrumbs = [breadcrumbs_tuple] + breadcrumbs
                 current_category = current_category.parent
         return breadcrumbs
 

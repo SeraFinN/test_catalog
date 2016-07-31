@@ -1,14 +1,12 @@
+{% load category_tree %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Каталог{% endblock %}</title>
     <style>
-        .level_2 {
-            margin-left: 20px;
-        }
-
-        .level_3 {
-            margin-left: 30px;
+        li {
+            list-style-type: none;
         }
 
         #main {
@@ -20,15 +18,13 @@
         }
 
         #sidebar {
-{#            border: dashed 1px;#}
-            float: left;
+        {#            border: dashed 1px;#} float: left;
             width: 30%;
             height: 500px;
         }
 
         #content {
-{#            border: dashed 1px;#}
-            height: 100%;
+        {#            border: dashed 1px;#} height: 100%;
         }
 
         .item_product {
@@ -45,12 +41,9 @@
         <div id="sidebar">
             {% include "nav.html" %}
         </div>
-        {#|unordered_list#}
-        {#        <div id="test">{{ test_data }}</div>#}
+
         {% block breadcrumbs %}
-            {% if is_main %}
-                Главная
-            {% else %}
+            {% if not is_main %}
                 <a href="/">Главная</a>
             {% endif %}
 
