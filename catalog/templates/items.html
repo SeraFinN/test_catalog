@@ -17,7 +17,7 @@
     <div class="pagination">
         <span class="step-links">
             {% if item_list.has_previous %}
-                <a href="?{{ item_list.previous_page_number|add_get_param:request  }}">&lt;&lt;&lt;Назад</a>
+                <a href="?{{ item_list.previous_page_number|add_get_param:get_params  }}">&lt;&lt;&lt;Назад</a>
             {% endif %}
 
             <span class="current">
@@ -25,7 +25,7 @@
             </span>
 
             {% if item_list.has_next %}
-                <a href="?{{ item_list.next_page_number|add_get_param:request }}">Вперед&gt;&gt;&gt;</a>
+                <a href="?{{ item_list.next_page_number|add_get_param:get_params }}">Вперед&gt;&gt;&gt;</a>
             {% endif %}
         </span>
     </div>

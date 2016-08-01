@@ -1,23 +1,22 @@
+# coding=utf-8
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .models import Product, Categories
 from .formater import prepare_data
+from .models import Product, Categories
 
 
 def product_list(request, **params):
-    categories_dict = Categories.objects.all().values('id', 'parent_id', 'name')
-    breadcrumbs = []
     is_main = True
-
+    breadcrumbs = []
+    products_page = None
     products = None
-    items = None
     current_category = None
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         is_main = False
-        breadcrumbs += [('Search: ' + q, None)]
+        breadcrumbs += [(u'Поиск: ' + q, None)]
         products = Product.objects.filter(name__icontains=q)
     elif params and params['slug']:
         is_main = False
@@ -35,20 +34,20 @@ def product_list(request, **params):
         page = request.GET.get('page')
 
         try:
-            items = paginator.page(page)
-            items.next_page_number()
+            products_page = paginator.page(page)
+            products_page.next_page_number()
         except PageNotAnInteger:
-            items = paginator.page(1)
+            products_page = paginator.page(1)
         except EmptyPage:
-            items = paginator.page(paginator.num_pages)
+            products_page = paginator.page(paginator.num_pages)
 
     context = dict()
     context['current_category'] = current_category
-    context['item_list'] = items
+    context['item_list'] = products_page
     context['breadcrumbs'] = breadcrumbs
     context['is_main'] = is_main
-    context['request'] = request
-    context['categories_list'] = prepare_data(categories_dict)
+    context['get_params'] = request.GET.copy()
+    context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
     return render_to_response('product_list.html', context)
 
 

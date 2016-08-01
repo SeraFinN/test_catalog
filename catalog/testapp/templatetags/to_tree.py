@@ -1,7 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
-from testapp.models import Categories
 
+from testapp.models import Categories
 
 register = template.Library()
 
@@ -17,7 +17,8 @@ def to_tree(format_list, current_category):
                 out = out + "<ul>" + html_tag_list(item, level + 1) + "</ul>"
             else:
 
-                list_item = "<li><a href=" + items.get(id=item['id']).get_absolute_url() + ">" + item['name'] + "</a></li>"
+                list_item = "<li><a href=" + items.get(id=item['id']).get_absolute_url() + ">" + item[
+                    'name'] + "</a></li>"
                 out += list_item
         return out
 

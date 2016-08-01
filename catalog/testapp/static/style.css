@@ -18,10 +18,9 @@ html, body{
 }
 
 .breadcrumbs {
-    border: dashed 1px;
+    /*border: dashed 1px;*/
     position: relative;
     width: 100%;
-    background: #c3c3c3;
 }
 
 #sidebar {
@@ -34,11 +33,12 @@ html, body{
 }
 
 #search {
+    width: 100%;
     border: dashed 1px;
 }
 
 #content {
-    border: dashed 1px;
+    /*border: dashed 1px;*/
     height: 100%;
 }
 

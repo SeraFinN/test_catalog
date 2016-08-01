@@ -1,8 +1,8 @@
 # coding=utf-8
 
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 
 
 class Images(models.Model):
@@ -14,7 +14,7 @@ class Images(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='category')
+    parent = models.ForeignKey('self', blank=True, null=True)
     slug = models.SlugField(unique=True)
     default_image = models.ForeignKey(Images, blank=True, null=True)
 
@@ -27,11 +27,12 @@ class Categories(models.Model):
         return self.default_image
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.full_clean()
         super(Categories, self).save(*args, **kwargs)
 
     def clean(self):
+        if self.id == self.parent_id:
+            raise ValidationError("Category id can't equals category parent id")
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
@@ -82,4 +83,4 @@ class Product(models.Model):
         return str(self.id) + ' | ' + self.name
 
     def get_absolute_url(self):
-        return "/product/" + str(self.id)
+        return reverse("product_details", args=[self.id])
