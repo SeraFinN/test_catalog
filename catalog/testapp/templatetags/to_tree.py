@@ -7,7 +7,7 @@ register = template.Library()
 
 
 @register.filter()
-def to_tree(format_list, current_id):
+def to_tree(format_list, current_category):
     items = Categories.objects.all()
 
     def html_tag_list(categories, level):
@@ -27,7 +27,7 @@ def to_tree(format_list, current_id):
             if isinstance(item, type([])):
                 out += gt_simbols(item, level + 1)
             else:
-                if item['id'] == current_id:
+                if current_category and item['id'] == current_category.id:
                     out = out + ">" * level + item['name'] + "<br />"
                 else:
                     link = "<a href=" + items.get(id=item['id']).get_absolute_url() + ">" + item['name'] + "</a><br />"

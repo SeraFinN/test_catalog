@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% if not is_main %}
+    {% block title %}Категория - {{ current_category.name }}{% endblock %}
+{% endif %}
+
 {% block content %}
     <div id="content">
         {% include "items.html" %}

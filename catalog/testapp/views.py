@@ -10,20 +10,19 @@ def product_list(request, **params):
     categories_dict = Categories.objects.all().values('id', 'parent_id', 'name')
     breadcrumbs = []
     is_main = True
-    slug = params['slug']
+
     products = None
     items = None
-    current_id = None
+    current_category = None
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         is_main = False
         breadcrumbs += [('Search: ' + q, None)]
         products = Product.objects.filter(name__icontains=q)
-    elif slug:
+    elif params and params['slug']:
         is_main = False
         try:
-            current_category = Categories.objects.get(slug__iexact=slug)
-            current_id = current_category.id
+            current_category = Categories.objects.get(slug__iexact=params['slug'])
             breadcrumbs = current_category.get_breadcrumbs()
         except Categories.DoesNotExist:
             raise Http404
@@ -44,7 +43,7 @@ def product_list(request, **params):
             items = paginator.page(paginator.num_pages)
 
     context = dict()
-    context['current_id'] = current_id
+    context['current_category'] = current_category
     context['item_list'] = items
     context['breadcrumbs'] = breadcrumbs
     context['is_main'] = is_main
@@ -61,7 +60,7 @@ def product_details(request, **params):
     except Product.DoesNotExist:
         raise Http404
     context = dict()
-    context['current_id'] = None
+    context['current_category'] = None
     context['is_main'] = False
     context['product'] = product
     context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))

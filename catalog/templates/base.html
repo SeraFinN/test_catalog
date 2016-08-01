@@ -1,47 +1,16 @@
+{% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}Электронный каталог{% endblock %}</title>
-    <style>
-        li {
-            list-style-type: none;
-        }
-
-        #page {
-            position: relative;
-            border: dashed 1px;
-            width: 1000px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        #sidebar {
-        {#            border: dashed 1px;#} float: left;
-            width: 300px;
-            height: 500px;
-        }
-
-        #search {
-            float: right;
-            width: 700px;
-        }
-
-        #content {
-        {#            border: dashed 1px;#} height: 100%;
-        }
-
-        .item_product {
-            width: 130px;
-            height: 100px;
-            border: dashed 1px;
-        }
-    </style>
+    <link href="{% static "style.css" %}" rel="stylesheet"/>
 </head>
 
 <body>
 <div id="page">
     {% block header %}
-        <div id="search">
+        <div id="search" align="right" >
             <form action="/search/" method="get">
                 <input type="text" name="q">
                 <input type="submit" value="Search">
@@ -56,6 +25,7 @@
         </div>
 
         <div id="content">
+
             {% block breadcrumbs %}
                 {% include "breadcrumbs.html" %}
             {% endblock %}
@@ -64,6 +34,7 @@
             {% endblock %}
         </div>
     {% endblock %}
+
 </div>
 </body>
 </html>
