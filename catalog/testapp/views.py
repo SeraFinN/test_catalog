@@ -14,7 +14,7 @@ def product_list(request, **params):
         raise Http404
     products = Product.objects.filter(category=current_category)
     context = dict()
-    context['item_list'] = get_page(products, request.GET.get('page'))
+    context['item_list'] = get_page(products, request.GET.get('page'), 12)
     context['get_params'] = request.GET.copy()
     context['current_category'] = current_category
     context['breadcrumbs'] = current_category.get_breadcrumbs()
@@ -28,7 +28,7 @@ def search(request):
     context = dict()
     context['get_params'] = request.GET.copy()
     context['breadcrumbs'] = [(u'Поиск: %s' % q, None)]
-    context['item_list'] = get_page(products, request.GET.get('page'))
+    context['item_list'] = get_page(products, request.GET.get('page'), 12)
     context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
     return render_to_response('product_list.html', context)
 

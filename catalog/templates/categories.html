@@ -3,8 +3,10 @@
 <div class='nav'>
     <i>Категории:<br /></i>
     {% for category in categories_list %}
-        {{ category.level|level_to_gt }}{{ category.name }}<br />
+        {% ifequal category.id current_category.id  %}
+            {{ category.level|level_to_gt }}{{ category.name }}<br />
+        {% else %}
+            {{ category.level|level_to_gt }}<a href={{ category.url }}>{{ category.name }}</a><br />
+        {% endifequal %}
     {% endfor %}
-
-{#    {{ categories_list|to_tree:current_category }}#}
 </div>
