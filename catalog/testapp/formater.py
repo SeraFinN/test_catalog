@@ -6,13 +6,26 @@ def prepare_data(items):
     for item in items:
         father_childs[item['parent_id']].append(item)
 
-    def to_list(root):
+    # def to_list(root):
+    #     l = []
+    #     for category in sorted(father_childs[root]):
+    #         l.append(category)
+    #         sub_list = to_list(category['id'])
+    #         if sub_list:
+    #             l.append(sub_list)
+    #     return l
+    #
+    # return to_list(None)
+
+
+    def to_list(root, level):
         l = []
         for category in sorted(father_childs[root]):
+            category['level'] = level
             l.append(category)
-            sub_list = to_list(category['id'])
+            sub_list = to_list(category['id'], level + 1)
             if sub_list:
-                l.append(sub_list)
+                l += sub_list
         return l
-
-    return to_list(None)
+    # assert False, to_list(None, 0)
+    return to_list(None, 0)

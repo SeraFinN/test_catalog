@@ -1,14 +1,8 @@
 <div class="item_product">
-    <table>
-        <tr>
-            <td>
-                <a href={{ item.get_absolute_url }}>{{ item.name }}</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="{{ item.get_image.image.url }}" width="20" height="20"/>
-            </td>
-        </tr>
-    </table>
+    <div class="product_name">
+        <a href={{ item.get_absolute_url }}>{{ item.name }}</a>
+    </div>
+    <div class="product_image">
+        <img src="{{ item.get_image.image.url }}" width="20" height="20"/>
+    </div>
 </div>

@@ -27,16 +27,21 @@ class Categories(models.Model):
         return self.default_image
 
     def save(self, *args, **kwargs):
-        self.full_clean()
-        super(Categories, self).save(*args, **kwargs)
-
-    def clean(self):
         if self.id == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
             raise ValidationError('Root catalog must have image')
+        super(Categories, self).save(*args, **kwargs)
+
+    # def clean(self):
+    #     if self.id == self.parent_id:
+    #         raise ValidationError("Category id can't equals category parent id")
+    #     if self.get_level() > 3:
+    #         raise ValidationError('Max level for subcategories is 3')
+    #     if not self.parent and not self.default_image:
+    #         raise ValidationError('Root catalog must have image')
 
     def get_absolute_url(self):
         current_category = self

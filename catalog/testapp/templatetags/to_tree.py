@@ -10,18 +10,6 @@ register = template.Library()
 def to_tree(format_list, current_category):
     items = Categories.objects.all()
 
-    def html_tag_list(categories, level):
-        out = ''
-        for item in categories:
-            if isinstance(item, type([])):
-                out = out + "<ul>" + html_tag_list(item, level + 1) + "</ul>"
-            else:
-
-                list_item = "<li><a href=" + items.get(id=item['id']).get_absolute_url() + ">" + item[
-                    'name'] + "</a></li>"
-                out += list_item
-        return out
-
     def gt_simbols(categories, level):
         out = ''
         for item in categories:

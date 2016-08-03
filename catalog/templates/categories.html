@@ -1,6 +1,10 @@
-{% load to_tree %}
+{% load level_to_gt %}
 
 <div class='nav'>
     <i>Категории:<br /></i>
-    {{ categories_list|to_tree:current_category }}
+    {% for category in categories_list %}
+        {{ category.level|level_to_gt }}{{ category.name }}<br />
+    {% endfor %}
+
+{#    {{ categories_list|to_tree:current_category }}#}
 </div>
