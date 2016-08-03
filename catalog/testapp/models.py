@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
 
 
 class Images(models.Model):
@@ -26,29 +25,20 @@ class Categories(models.Model):
             return category.default_image
         return self.default_image
 
-    def save(self, *args, **kwargs):
+    def clean(self):
         if self.id == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
             raise ValidationError('Root catalog must have image')
-        super(Categories, self).save(*args, **kwargs)
-
-    # def clean(self):
-    #     if self.id == self.parent_id:
-    #         raise ValidationError("Category id can't equals category parent id")
-    #     if self.get_level() > 3:
-    #         raise ValidationError('Max level for subcategories is 3')
-    #     if not self.parent and not self.default_image:
-    #         raise ValidationError('Root catalog must have image')
 
     def get_absolute_url(self):
-        current_category = self
         url = '/'
+        current_category = self
         while current_category:
             if current_category.slug:
-                url = '/' + current_category.slug + url
+                url = '/%s%s' % (current_category.slug, url)
                 current_category = current_category.parent
         return url
 
@@ -57,18 +47,14 @@ class Categories(models.Model):
 
     def get_breadcrumbs(self):
         breadcrumbs = []
-        current_category = self
-        while current_category:
-            if current_category.slug:
-                breadcrumbs_tuple = (current_category.name, current_category.get_absolute_url(), current_category.slug)
-                breadcrumbs = [breadcrumbs_tuple] + breadcrumbs
-                current_category = current_category.parent
+        category = self
+        while category:
+            breadcrumbs = [(category.name, category.get_absolute_url(), category.slug)] + breadcrumbs
+            category = category.parent
         return breadcrumbs
 
     def __unicode__(self):
-        test_name = str(self.id) + ' | ' + self.name + ' | ' + str(self.get_level())
-        # test_name += str(self.get_level()) + ' | ' + self.get_absolute_url()
-        return test_name
+        return "%s - %s" % (self.id, self.name)
 
 
 class Product(models.Model):
@@ -85,7 +71,7 @@ class Product(models.Model):
         return self.image
 
     def __unicode__(self):
-        return str(self.id) + ' | ' + self.name
+        return "%s - %s" % (self.id, self.name)
 
     def get_absolute_url(self):
         return reverse("product_details", args=[self.id])

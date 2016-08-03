@@ -3,8 +3,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 
-from .formater import prepare_data
-from .models import Product, Categories
+from testapp.formater import prepare_data
+from testapp.models import Product, Categories
 from pagination import get_page
 
 
@@ -14,10 +14,10 @@ def product_list(request, **params):
         raise Http404
     products = Product.objects.filter(category=current_category)
     context = dict()
-    context['item_list'] = get_page(products, request.GET.get('page'), 12)
     context['get_params'] = request.GET.copy()
     context['current_category'] = current_category
     context['breadcrumbs'] = current_category.get_breadcrumbs()
+    context['item_list'] = get_page(products, request.GET.get('page'), 12)
     context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
     return render_to_response('product_list.html', context)
 

@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
-from django.conf.urls import *
-from django.conf.urls import patterns, include
+from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 
 from testapp.views import product_list, product_details, search, main
@@ -17,7 +16,7 @@ urlpatterns += patterns((),
                         url(r'^product/(?P<id>\d+)/?$', product_details, name='product_details'),
                         (r'^$', main),
                         (r'^search/$', search),
-                        (r'^((?P<slug>[\w-]+)/)*$', product_list),
+                        (r'^(?:(?P<slug>[\w-]+)/)*$', product_list),
                         )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 # from django.contrib import admin

@@ -2,6 +2,8 @@
 
 {% if not is_main %}
     {% block title %}Категория - {{ current_category.name }}{% endblock %}
+{% else %}
+    {% block title %}{{ block.super }}{% endblock %}
 {% endif %}
 
 {% block content %}
