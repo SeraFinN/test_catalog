@@ -17,7 +17,7 @@ urlpatterns += patterns((),
                         url(r'^product/(?P<id>\d+)/?$', product_details, name='product_details'),
                         (r'^$', main),
                         (r'^search/$', search),
-                        (r'^((?P<slug>[\w-]+)/?)*$', product_list),
+                        (r'^((?P<slug>[\w-]+)/)*$', product_list),
                         )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 # from django.contrib import admin

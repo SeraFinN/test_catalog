@@ -36,7 +36,6 @@ def search(request):
 def main(request):
     context = dict()
     context['is_main'] = True
-    context['get_params'] = request.GET.copy()
     context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
     return render_to_response('product_list.html', context)
 

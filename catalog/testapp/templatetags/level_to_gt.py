@@ -1,5 +1,4 @@
 from django import template
-from testapp.models import Categories
 
 register = template.Library()
 
