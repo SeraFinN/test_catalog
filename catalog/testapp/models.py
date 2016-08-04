@@ -59,7 +59,7 @@ class Categories(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Categories, blank=True, null=True)
+    category = models.ForeignKey(Categories)
     count = models.IntegerField()
     price = models.IntegerField()
     description = models.TextField()
@@ -74,4 +74,4 @@ class Product(models.Model):
         return "%s - %s" % (self.id, self.name)
 
     def get_absolute_url(self):
-        return reverse("product_details", args=[self.id])
+        return reverse("testapp.views.product_details", args=[self.id])

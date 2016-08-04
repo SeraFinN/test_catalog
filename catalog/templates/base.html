@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Электронный каталог{% endblock %}</title>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
     <link href="{% static "style.css" %}" rel="stylesheet"/>
 </head>
 
@@ -12,7 +12,7 @@
     {% block header %}
         <div id="search" align="right">
             <form action="/search/" method="get">
-                <input type="text" name="q">
+                <input type="text" name="q" title="Поиск">
                 <input type="submit" value="Search">
             </form>
         </div>
