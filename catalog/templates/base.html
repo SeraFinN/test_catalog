@@ -10,6 +10,13 @@
 <body>
 <div id="page">
     {% block header %}
+        <div id="accounts_info" align="right">
+            {% if user.is_authenticated %}
+                {{ user }}&emsp;<a href="/logout/?next=/">Выход</a>
+            {% else %}
+                <a href="/login/?next=/">Войти</a>
+            {% endif %}
+        </div>
         <div id="search" align="right">
             <form action="/search/" method="get">
                 <input type="text" name="q" title="Поиск">

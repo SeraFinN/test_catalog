@@ -1,4 +1,6 @@
 # coding=utf-8
+from datetime import datetime
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
@@ -17,6 +19,9 @@ class Categories(models.Model):
     slug = models.SlugField(unique=True)
     default_image = models.ForeignKey(Images, blank=True, null=True)
 
+    def __unicode__(self):
+        return "%s - %s" % (self.id, self.name)
+
     def get_image(self):
         if not self.default_image:
             category = self.parent
@@ -26,7 +31,7 @@ class Categories(models.Model):
         return self.default_image
 
     def clean(self):
-        if self.id == self.parent_id:
+        if self.id and self.id == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
@@ -53,8 +58,12 @@ class Categories(models.Model):
             category = category.parent
         return breadcrumbs
 
-    def __unicode__(self):
-        return "%s - %s" % (self.id, self.name)
+
+class AvailableProductManager(models.Manager):
+    def get_query_set(self):
+        query_set = super(AvailableProductManager, self).get_query_set()
+        # assert False, query_set#.filter(release_date__lte=datetime.now())
+        return query_set.filter(release_date__lte=datetime.now())
 
 
 class Product(models.Model):
@@ -63,15 +72,20 @@ class Product(models.Model):
     count = models.IntegerField()
     price = models.IntegerField()
     description = models.TextField()
+    release_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    is_hidden = models.BooleanField(default=False)
     image = models.ForeignKey(Images, blank=True, null=True)
+
+    objects = models.Manager()
+    available = AvailableProductManager()
+
+    def __unicode__(self):
+        return "%r - %r" % (self.release_date, datetime.utcnow())
 
     def get_image(self):
         if not self.image:
             return self.category.get_image()
         return self.image
-
-    def __unicode__(self):
-        return "%s - %s" % (self.id, self.name)
 
     def get_absolute_url(self):
         return reverse("testapp.views.product_details", args=[self.id])

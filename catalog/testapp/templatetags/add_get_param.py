@@ -4,6 +4,7 @@ register = template.Library()
 
 
 @register.filter
-def add_get_param(value, params):
+def add_get_param(value, request):
+    params = request.GET.copy()
     params['page'] = value
     return params.urlencode()

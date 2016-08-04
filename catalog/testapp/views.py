@@ -1,54 +1,52 @@
 # coding=utf-8
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 
-from testapp.formater import prepare_data
 from testapp.models import Product, Categories
 from pagination import get_page
 
 
 def product_list(request, **params):
-    current_category = get_object_or_404(Categories, slug__iexact=params.get('slug'))
+    current_category = get_object_or_404(Categories, slug=params.get('slug'))
     if request.path != current_category.get_absolute_url():
         raise Http404
-    products = Product.objects.filter(category=current_category)
-    context = dict()
-    context['title'] = u'Категория - %s' % current_category.name
-    context['get_params'] = request.GET.copy()
-    context['current_category'] = current_category
-    context['breadcrumbs'] = current_category.get_breadcrumbs()
-    context['item_list'] = get_page(products, request.GET.get('page'), 12)
-    context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
-    return render_to_response('product_list.html', context)
+    products = Product.available.filter(category=current_category)
+    context = {
+        'title': u'Категория - %s' % current_category.name,
+        'current_category': current_category,
+        'breadcrumbs': current_category.get_breadcrumbs(),
+        'item_list': get_page(products, request.GET.get('page'), 12),
+    }
+    return render_to_response('product_list.html', context, context_instance=RequestContext(request))
 
 
 def search(request):
-    q = request.GET.get('q', None)
-    products = Product.objects.filter(name__icontains=q) if q else Product.objects.none()
-    context = dict()
-    context['title'] = u'Поиск: %s' % q
-    context['get_params'] = request.GET.copy()
-    context['breadcrumbs'] = [(u'Поиск: %s' % q, None)]
-    context['item_list'] = get_page(products, request.GET.get('page'), 12)
-    context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
-    return render_to_response('product_list.html', context)
+    query = request.GET.get('q', None)
+    products = Product.available.filter(name__icontains=query) if query else Product.objects.none()
+    context = {
+        'title': u'Категория - %s' % u'Поиск: %s' % query,
+        'breadcrumbs': [(u'Поиск: %s' % query, None)],
+        'item_list': get_page(products, request.GET.get('page'), 12),
+    }
+    return render_to_response('product_list.html', context,  context_instance=RequestContext(request))
 
 
 def main(request):
-    context = dict()
-    context['title'] = u'Электронный каталог'
-    context['breadcrumbs'] = None
-    context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
-    return render_to_response('product_list.html', context)
+    context = {
+        'title': u'Электронный каталог',
+        'breadcrumbs': None,
+    }
+    return render_to_response('product_list.html', context, context_instance=RequestContext(request))
 
 
 def product_details(request, **params):
     if not params:
         raise Http404
     product = get_object_or_404(Product, id=params['id'])
-    context = dict()
-    context['product'] = product
-    context['title'] = product.name
-    context['categories_list'] = prepare_data(Categories.objects.all().values('id', 'parent_id', 'name'))
-    context['breadcrumbs'] = product.category.get_breadcrumbs() + [(product.name, None)]
-    return render_to_response('product_details.html', context)
+    context = {
+        'product': product,
+        'title': product.name,
+        'breadcrumbs': product.category.get_breadcrumbs() + [(product.name, None)],
+    }
+    return render_to_response('product_details.html', context, context_instance=RequestContext(request))
