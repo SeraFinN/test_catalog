@@ -2,16 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.3
--- Dumped by pg_dump version 9.5.3
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -34,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: auth_group; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_group (
@@ -43,7 +39,7 @@ CREATE TABLE auth_group (
 );
 
 
-ALTER TABLE auth_group OWNER TO "user";
+ALTER TABLE public.auth_group OWNER TO "user";
 
 --
 -- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -57,7 +53,7 @@ CREATE SEQUENCE auth_group_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_group_id_seq OWNER TO "user";
+ALTER TABLE public.auth_group_id_seq OWNER TO "user";
 
 --
 -- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -67,7 +63,7 @@ ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
 
 
 --
--- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_group_permissions (
@@ -77,7 +73,7 @@ CREATE TABLE auth_group_permissions (
 );
 
 
-ALTER TABLE auth_group_permissions OWNER TO "user";
+ALTER TABLE public.auth_group_permissions OWNER TO "user";
 
 --
 -- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -91,7 +87,7 @@ CREATE SEQUENCE auth_group_permissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_group_permissions_id_seq OWNER TO "user";
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO "user";
 
 --
 -- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -101,7 +97,7 @@ ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
 
 
 --
--- Name: auth_permission; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_permission (
@@ -112,7 +108,7 @@ CREATE TABLE auth_permission (
 );
 
 
-ALTER TABLE auth_permission OWNER TO "user";
+ALTER TABLE public.auth_permission OWNER TO "user";
 
 --
 -- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -126,7 +122,7 @@ CREATE SEQUENCE auth_permission_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_permission_id_seq OWNER TO "user";
+ALTER TABLE public.auth_permission_id_seq OWNER TO "user";
 
 --
 -- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -136,7 +132,7 @@ ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
 
 
 --
--- Name: auth_user; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_user (
@@ -154,10 +150,10 @@ CREATE TABLE auth_user (
 );
 
 
-ALTER TABLE auth_user OWNER TO "user";
+ALTER TABLE public.auth_user OWNER TO "user";
 
 --
--- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_user_groups (
@@ -167,7 +163,7 @@ CREATE TABLE auth_user_groups (
 );
 
 
-ALTER TABLE auth_user_groups OWNER TO "user";
+ALTER TABLE public.auth_user_groups OWNER TO "user";
 
 --
 -- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -181,7 +177,7 @@ CREATE SEQUENCE auth_user_groups_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_user_groups_id_seq OWNER TO "user";
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO "user";
 
 --
 -- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -202,7 +198,7 @@ CREATE SEQUENCE auth_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_user_id_seq OWNER TO "user";
+ALTER TABLE public.auth_user_id_seq OWNER TO "user";
 
 --
 -- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -212,7 +208,7 @@ ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
 
 
 --
--- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: user
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE auth_user_user_permissions (
@@ -222,7 +218,7 @@ CREATE TABLE auth_user_user_permissions (
 );
 
 
-ALTER TABLE auth_user_user_permissions OWNER TO "user";
+ALTER TABLE public.auth_user_user_permissions OWNER TO "user";
 
 --
 -- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -236,7 +232,7 @@ CREATE SEQUENCE auth_user_user_permissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE auth_user_user_permissions_id_seq OWNER TO "user";
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO "user";
 
 --
 -- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -246,7 +242,7 @@ ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permiss
 
 
 --
--- Name: django_admin_log; Type: TABLE; Schema: public; Owner: user
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE django_admin_log (
@@ -262,7 +258,7 @@ CREATE TABLE django_admin_log (
 );
 
 
-ALTER TABLE django_admin_log OWNER TO "user";
+ALTER TABLE public.django_admin_log OWNER TO "user";
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -276,7 +272,7 @@ CREATE SEQUENCE django_admin_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE django_admin_log_id_seq OWNER TO "user";
+ALTER TABLE public.django_admin_log_id_seq OWNER TO "user";
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -286,7 +282,7 @@ ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
 
 
 --
--- Name: django_content_type; Type: TABLE; Schema: public; Owner: user
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE django_content_type (
@@ -297,7 +293,7 @@ CREATE TABLE django_content_type (
 );
 
 
-ALTER TABLE django_content_type OWNER TO "user";
+ALTER TABLE public.django_content_type OWNER TO "user";
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -311,7 +307,7 @@ CREATE SEQUENCE django_content_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE django_content_type_id_seq OWNER TO "user";
+ALTER TABLE public.django_content_type_id_seq OWNER TO "user";
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -321,7 +317,7 @@ ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
 
 
 --
--- Name: django_session; Type: TABLE; Schema: public; Owner: user
+-- Name: django_session; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE django_session (
@@ -331,10 +327,10 @@ CREATE TABLE django_session (
 );
 
 
-ALTER TABLE django_session OWNER TO "user";
+ALTER TABLE public.django_session OWNER TO "user";
 
 --
--- Name: django_site; Type: TABLE; Schema: public; Owner: user
+-- Name: django_site; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE django_site (
@@ -344,7 +340,7 @@ CREATE TABLE django_site (
 );
 
 
-ALTER TABLE django_site OWNER TO "user";
+ALTER TABLE public.django_site OWNER TO "user";
 
 --
 -- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -358,7 +354,7 @@ CREATE SEQUENCE django_site_id_seq
     CACHE 1;
 
 
-ALTER TABLE django_site_id_seq OWNER TO "user";
+ALTER TABLE public.django_site_id_seq OWNER TO "user";
 
 --
 -- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -368,7 +364,7 @@ ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
 
 
 --
--- Name: testapp_author; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_author; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_author (
@@ -381,7 +377,7 @@ CREATE TABLE testapp_author (
 );
 
 
-ALTER TABLE testapp_author OWNER TO "user";
+ALTER TABLE public.testapp_author OWNER TO "user";
 
 --
 -- Name: testapp_author_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -395,7 +391,7 @@ CREATE SEQUENCE testapp_author_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_author_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_author_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_author_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -405,7 +401,7 @@ ALTER SEQUENCE testapp_author_id_seq OWNED BY testapp_author.id;
 
 
 --
--- Name: testapp_book; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_book; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_book (
@@ -416,10 +412,10 @@ CREATE TABLE testapp_book (
 );
 
 
-ALTER TABLE testapp_book OWNER TO "user";
+ALTER TABLE public.testapp_book OWNER TO "user";
 
 --
--- Name: testapp_book_authors; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_book_authors; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_book_authors (
@@ -429,7 +425,7 @@ CREATE TABLE testapp_book_authors (
 );
 
 
-ALTER TABLE testapp_book_authors OWNER TO "user";
+ALTER TABLE public.testapp_book_authors OWNER TO "user";
 
 --
 -- Name: testapp_book_authors_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -443,7 +439,7 @@ CREATE SEQUENCE testapp_book_authors_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_book_authors_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_book_authors_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_book_authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -464,7 +460,7 @@ CREATE SEQUENCE testapp_book_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_book_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_book_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -474,7 +470,7 @@ ALTER SEQUENCE testapp_book_id_seq OWNED BY testapp_book.id;
 
 
 --
--- Name: testapp_categories; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_categories; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_categories (
@@ -486,7 +482,7 @@ CREATE TABLE testapp_categories (
 );
 
 
-ALTER TABLE testapp_categories OWNER TO "user";
+ALTER TABLE public.testapp_categories OWNER TO "user";
 
 --
 -- Name: testapp_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -500,7 +496,7 @@ CREATE SEQUENCE testapp_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_categories_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_categories_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -510,7 +506,7 @@ ALTER SEQUENCE testapp_categories_id_seq OWNED BY testapp_categories.id;
 
 
 --
--- Name: testapp_images; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_images; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_images (
@@ -519,7 +515,7 @@ CREATE TABLE testapp_images (
 );
 
 
-ALTER TABLE testapp_images OWNER TO "user";
+ALTER TABLE public.testapp_images OWNER TO "user";
 
 --
 -- Name: testapp_images_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -533,7 +529,7 @@ CREATE SEQUENCE testapp_images_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_images_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_images_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -543,7 +539,7 @@ ALTER SEQUENCE testapp_images_id_seq OWNED BY testapp_images.id;
 
 
 --
--- Name: testapp_product; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_product; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_product (
@@ -557,7 +553,7 @@ CREATE TABLE testapp_product (
 );
 
 
-ALTER TABLE testapp_product OWNER TO "user";
+ALTER TABLE public.testapp_product OWNER TO "user";
 
 --
 -- Name: testapp_product_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -571,7 +567,7 @@ CREATE SEQUENCE testapp_product_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_product_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_product_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -581,7 +577,7 @@ ALTER SEQUENCE testapp_product_id_seq OWNED BY testapp_product.id;
 
 
 --
--- Name: testapp_publisher; Type: TABLE; Schema: public; Owner: user
+-- Name: testapp_publisher; Type: TABLE; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE TABLE testapp_publisher (
@@ -595,7 +591,7 @@ CREATE TABLE testapp_publisher (
 );
 
 
-ALTER TABLE testapp_publisher OWNER TO "user";
+ALTER TABLE public.testapp_publisher OWNER TO "user";
 
 --
 -- Name: testapp_publisher_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -609,7 +605,7 @@ CREATE SEQUENCE testapp_publisher_id_seq
     CACHE 1;
 
 
-ALTER TABLE testapp_publisher_id_seq OWNER TO "user";
+ALTER TABLE public.testapp_publisher_id_seq OWNER TO "user";
 
 --
 -- Name: testapp_publisher_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -765,39 +761,45 @@ SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
 --
 
 COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
-1	Can add permission	1	add_permission
-2	Can change permission	1	change_permission
-3	Can delete permission	1	delete_permission
-4	Can add group	2	add_group
-5	Can change group	2	change_group
-6	Can delete group	2	delete_group
-7	Can add user	3	add_user
-8	Can change user	3	change_user
-9	Can delete user	3	delete_user
-10	Can add content type	4	add_contenttype
-11	Can change content type	4	change_contenttype
-12	Can delete content type	4	delete_contenttype
-13	Can add session	5	add_session
-14	Can change session	5	change_session
-15	Can delete session	5	delete_session
-16	Can add site	6	add_site
-17	Can change site	6	change_site
-18	Can delete site	6	delete_site
-28	Can add categories	10	add_categories
-29	Can change categories	10	change_categories
-30	Can delete categories	10	delete_categories
-31	Can add log entry	11	add_logentry
-32	Can change log entry	11	change_logentry
-33	Can delete log entry	11	delete_logentry
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add site	7	add_site
+20	Can change site	7	change_site
+21	Can delete site	7	delete_site
+22	Can add publisher	8	add_publisher
+23	Can change publisher	8	change_publisher
+24	Can delete publisher	8	delete_publisher
+25	Can add author	9	add_author
+26	Can change author	9	change_author
+27	Can delete author	9	delete_author
+28	Can add book	10	add_book
+29	Can change book	10	change_book
+30	Can delete book	10	delete_book
+31	Can add categories	11	add_categories
+32	Can change categories	11	change_categories
+33	Can delete categories	11	delete_categories
 34	Can add images	12	add_images
 35	Can change images	12	change_images
 36	Can delete images	12	delete_images
 37	Can add product	13	add_product
 38	Can change product	13	change_product
 39	Can delete product	13	delete_product
-40	Can add test	14	add_test
-41	Can change test	14	change_test
-42	Can delete test	14	delete_test
 \.
 
 
@@ -813,7 +815,7 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 42, true);
 --
 
 COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
-1	root			serafinn@mail.ru	pbkdf2_sha256$10000$kuhLdSfCkIkc$voJK0Xrn2UWj88rCkrDkJwSXln51hbZS09TLBN8I3xw=	t	t	t	2016-07-22 15:21:15.89576+07	2016-07-22 15:18:35.272258+07
+1	serafinn			serafinn@mail.ru	pbkdf2_sha256$10000$5Mq51C4jI8AJ$PdImUZx7aQJDVbCiDx03HBsS5Ex7DbaUB2EJ0MWuTFs=	t	t	t	2016-07-23 23:48:28.094465+07	2016-07-23 23:46:16.357792+07
 \.
 
 
@@ -859,240 +861,83 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
-1	2016-07-22 15:44:48.800516+07	1	12	1	Images object	1	
-2	2016-07-22 15:45:00.046696+07	1	12	2	Images object	1	
-3	2016-07-22 15:46:11.105678+07	1	13	1	19' монитро номер раз\n	1	
-4	2016-07-22 15:46:46.856267+07	1	13	2	21" номер раз\n	1	
-5	2016-07-22 15:47:34.966522+07	1	13	3	оооочень мощьный проц от интел\n	1	
-6	2016-07-22 15:47:53.854615+07	1	13	4	замена печки\n	1	
-7	2016-07-22 15:48:37.642922+07	1	13	5	процессор для ноутбука\n	1	
-8	2016-07-22 17:13:07.764913+07	1	13	6	процессор для ноутбука 2\n	1	
-9	2016-07-25 09:11:41.788988+07	1	10	1	Мониторы | /monitors/ | 1	1	
-10	2016-07-25 09:11:51.541493+07	1	10	2	21 | /monitors/21/ | 2	1	
-11	2016-07-25 09:12:07.216665+07	1	10	3	19 | /monitors/19/ | 2	1	
-12	2016-07-25 09:12:37.936634+07	1	10	4	27 | /monitors/27/ | 2	1	
-13	2016-07-25 09:32:35.209106+07	1	10	5	TFT | /monitors/19/tft/ | 3	1	
-14	2016-07-25 09:33:03.463487+07	1	10	6	lcd | /monitors/19/lcd/ | 3	1	
-15	2016-07-25 09:33:35.365077+07	1	10	7	tft | /monitors/21/tft/ | 3	1	
-16	2016-07-25 09:34:06.224743+07	1	10	8	Процессоры | /cpu/ | 1	1	
-17	2016-07-25 09:34:49.105394+07	1	10	9	intel | /cpu/intel/ | 2	1	
-18	2016-07-25 10:15:25.19557+07	1	12	3	Images object	1	
-19	2016-07-25 10:15:39.484016+07	1	10	1	Монитры | /monitors/ | 1	1	
-20	2016-07-25 10:15:52.773197+07	1	10	2	19 | /monitors/19/ | 2	1	
-21	2016-07-25 10:16:41.653559+07	1	13	1	Product object	1	
-22	2016-07-25 10:21:51.943229+07	1	10	3	21 | /monitors/21/ | 2	1	
-23	2016-07-25 10:21:58.801428+07	1	13	2	21" монитор	1	
-24	2016-07-25 10:35:44.02325+07	1	13	3	19' монитор asus	1	
-25	2016-07-25 10:46:26.622151+07	1	10	5	Процессоры | /cpu/ | 1	1	
-26	2016-07-25 10:46:58.32601+07	1	10	6	Intel | /cpu/intel/ | 2	1	
-27	2016-07-25 10:48:35.900614+07	1	10	7	Intel notebook | /cpu/intel/notebook/ | 3	1	
-28	2016-07-25 10:49:41.815799+07	1	13	4	Intel i7	1	
-29	2016-07-25 10:50:05.711201+07	1	13	5	intel i3 notebook	1	
-30	2016-07-25 11:44:26.937585+07	1	10	1	Процессоры | /cpu/ | 1	1	
-31	2016-07-25 11:47:38.080134+07	1	10	2	Мониторы | /monitors/ | 1	1	
-32	2016-07-25 11:49:12.639443+07	1	10	2	Мониторы | /monitors/ | 1	3	
-33	2016-07-25 11:49:12.649267+07	1	10	1	Процессоры | /cpu/ | 1	3	
-34	2016-07-25 11:49:29.450496+07	1	10	3	Мониторы | /monitors/ | 1	1	
-35	2016-07-25 11:49:46.281964+07	1	10	4	Процессоры | /cpu/ | 1	1	
-36	2016-07-25 11:50:17.639691+07	1	10	5	19 | /monitors/19/ | 2	1	
-37	2016-07-25 11:50:28.106895+07	1	10	6	21 | /monitors/21/ | 2	1	
-38	2016-07-25 11:51:02.566179+07	1	10	7	intel | /cpu/intel/ | 2	1	
-39	2016-07-25 11:51:18.660215+07	1	10	8	amd | /cpu/amd/ | 2	1	
-40	2016-07-25 11:51:39.346065+07	1	10	9	notebook | /cpu/intel/notebooks/ | 3	1	
-41	2016-07-25 11:52:01.068932+07	1	10	10	notebook | /cpu/amd/notebooks/ | 3	1	
-42	2016-07-25 11:53:37.710547+07	1	13	1	19' монитор	1	
-43	2016-07-25 11:53:59.375385+07	1	13	2	21" монитор	1	
-44	2016-07-25 11:54:22.216387+07	1	13	3	intel i3 notebook	1	
-45	2016-07-25 11:54:40.811752+07	1	13	4	amd cpu	1	
-46	2016-07-25 11:55:01.864947+07	1	13	5	amd notebook	1	
-47	2016-07-25 14:11:45.499607+07	1	13	6	19' монитор asusa	1	
-48	2016-07-25 14:12:13.632434+07	1	13	7	21" монитор benq	1	
-49	2016-07-25 14:30:07.834286+07	1	13	8	19' монитор noname	1	
-50	2016-07-25 14:32:19.271568+07	1	13	9	21" монитор noname	1	
-51	2016-07-25 14:43:58.510748+07	1	13	10	21" монитор noname	1	
-52	2016-07-25 14:44:38.611014+07	1	13	11	19' монитор noname 3	1	
-53	2016-07-25 14:45:05.642425+07	1	13	12	19' монитор noname 4	1	
-54	2016-07-25 14:45:18.412094+07	1	13	13	21" монитор benq 3	1	
-55	2016-07-25 14:45:30.153506+07	1	13	14	21" монитор benq 2	1	
-56	2016-07-25 14:45:57.532399+07	1	13	15	19' монитор asusaki	1	
-57	2016-07-25 14:46:18.179815+07	1	13	16	19' монитор noname 4	1	
-58	2016-07-25 15:24:34.210033+07	1	10	11	27 | /monitors/27/ | 2	1	
-59	2016-07-25 16:45:59.361497+07	1	10	2	Мониторы | /monitors/ | 1	1	
-60	2016-07-25 16:51:55.114766+07	1	10	3	19 | /monitors/19/ | 2	1	
-61	2016-07-25 16:52:16.431293+07	1	10	4	intel | /monitors/intel/ | 2	1	
-62	2016-07-25 16:52:27.804044+07	1	10	5	Процессоры | /cpu/ | 1	1	
-63	2016-07-25 16:52:37.26604+07	1	10	4	intel | /cpu/intel/ | 2	2	Changed parent.
-64	2016-07-25 16:53:04.805162+07	1	10	6	amd | /cpu/amd/ | 2	1	
-65	2016-07-25 16:53:32.190695+07	1	10	7	21 | /monitors/21/ | 2	1	
-66	2016-07-25 16:55:39.521445+07	1	10	8	Intel notebook | /cpu/amd/notebook/ | 3	1	
-67	2016-07-25 16:55:48.888369+07	1	10	8	Intel notebook | /cpu/intel/notebook/ | 3	2	Changed parent.
-68	2016-07-25 16:56:01.100004+07	1	10	8	Intel notebook | /cpu/amd/notebook/ | 3	2	Changed parent.
-69	2016-07-25 16:56:08.251564+07	1	10	8	Intel notebook | /cpu/intel/notebook/ | 3	2	Changed parent.
-70	2016-07-25 16:57:12.886232+07	1	13	1	19	1	
-71	2016-07-25 16:57:21.508168+07	1	13	1	19' монитор	2	Changed name.
-72	2016-07-25 16:57:49.366376+07	1	13	2	21" монитор	1	
-73	2016-07-25 16:58:06.385382+07	1	13	3	19' монитор noname 3	1	
-74	2016-07-26 09:44:55.527655+07	1	13	4	19' монитор noname 3	1	
-75	2016-07-26 09:45:07.322839+07	1	13	5	19' монитор noname 4	1	
-76	2016-07-26 09:49:32.970052+07	1	13	6	19' монитор noname 31	1	
-77	2016-07-26 09:49:47.394423+07	1	13	7	19' монитор 1	1	
-78	2016-07-26 09:49:58.289216+07	1	13	8	21" монитор benq	1	
-79	2016-07-26 09:50:08.888819+07	1	13	9	19' монитор asus	1	
-80	2016-07-26 09:50:52.120419+07	1	13	10	19' монитор asus 1	1	
-81	2016-07-26 09:51:01.5479+07	1	13	11	21" монитор noname	1	
-82	2016-07-26 10:06:32.964167+07	1	13	12	21" монитор noname 123	1	
-83	2016-07-26 10:06:41.924896+07	1	13	13	21" монитор benq	1	
-84	2016-07-26 12:42:37.895692+07	1	14	1	Test object	1	
-85	2016-07-26 12:44:27.176899+07	1	14	2	1-12-312-3	1	
-86	2016-07-26 12:45:08.486897+07	1	14	3	1	1	
-87	2016-07-26 12:46:12.986759+07	1	14	4	as-das-d	1	
-88	2016-07-26 12:46:18.183895+07	1	14	4	as-das-d	2	Changed slug.
-89	2016-07-26 12:46:23.038185+07	1	14	4	123	2	Changed slug.
-90	2016-07-26 12:48:14.494144+07	1	14	5	21-noname	1	
-91	2016-07-26 12:48:30.96737+07	1	14	6	21	1	
-92	2016-07-26 13:03:42.40909+07	1	14	7		1	
-93	2016-07-26 13:06:12.948063+07	1	12	1	Images object	1	
-94	2016-07-26 13:13:18.238676+07	1	10	5	Процессоры | cpu | 0	1	
-95	2016-07-26 13:13:36.889761+07	1	10	6	intel |  | 0	1	
-96	2016-07-26 13:14:27.536109+07	1	10	5	Процессоры | cpu | 0	2	Changed slug.
-97	2016-07-26 13:14:46.856022+07	1	10	6	intel | intel | 1	2	No fields changed.
-98	2016-07-26 13:15:49.027189+07	1	10	7	Intel notebook | intel-notebook | 1	1	
-99	2016-07-26 13:40:21.656059+07	1	10	8	13312312 123  | 13312312-123 | 2 | cpu/13312312-123/	1	
-100	2016-07-26 13:40:27.951395+07	1	10	8	13312312 123  | 13312312-123 | 2 | cpu/13312312-123/	3	
-101	2016-07-26 13:42:54.984621+07	1	10	9	процессоры | cpu1 | 1 | cpu1/	1	
-102	2016-07-26 14:54:15.754338+07	1	10	9	процессоры | cpu1 | 1 | cpu1/	3	
-103	2016-07-26 14:54:15.764507+07	1	10	7	Intel notebook | intel-notebook | 3 | cpu/intel/intel-notebook/	3	
-104	2016-07-26 14:54:29.498629+07	1	10	10	AMD | amd | 2 | cpu/amd/	1	
-105	2016-07-26 15:13:55.824211+07	1	13	1	intel i7	1	
-106	2016-07-26 15:14:14.377241+07	1	13	2	AMD Cpu	1	
-107	2016-07-26 16:47:39.756983+07	1	10	11	11 | notebook | notebook | 3 | cpu/intel/notebook/	1	
-108	2016-07-26 17:21:39.357365+07	1	10	12	12 | Мониторы | monitors | 1 | monitors/	1	
-109	2016-07-26 17:21:57.915578+07	1	10	13	13 | 19` | 19 | 2 | monitors/19/	1	
-110	2016-07-26 17:22:12.790995+07	1	10	14	14 | 21 | 21 | 2 | monitors/21/	1	
-111	2016-07-26 17:23:36.562966+07	1	13	3	19' монитор noname 3	1	
-112	2016-07-26 17:23:55.981656+07	1	13	4	19' монитор	1	
-113	2016-07-26 17:24:09.067775+07	1	13	5	19' монитор noname 4	1	
-114	2016-07-26 17:24:26.475894+07	1	13	6	21" монитор noname	1	
-115	2016-07-26 17:28:53.067177+07	1	13	7	intel i3 notebook	1	
-116	2016-07-26 17:30:39.365684+07	1	10	15	15 | 100 | 100 | 2 | monitors/100/	1	
-117	2016-07-26 17:32:00.554315+07	1	10	15	15 | 100 | 100 | 2 | monitors/100/	3	
-118	2016-07-26 17:33:13.971017+07	1	10	16	16 | amd notebook | amd-notebook | 3 | cpu/amd/amd-notebook/	1	
-119	2016-07-26 17:33:53.903768+07	1	10	16	16 | notebook | amd-notebook | 3 | cpu/amd/amd-notebook/	2	Changed name.
-120	2016-07-26 17:34:41.980256+07	1	10	16	16 | amd notebook | amd-notebook | 3 | cpu/amd/amd-notebook/	2	Changed name.
-121	2016-07-26 17:36:23.075236+07	1	13	8	19' монитор asus	1	
-122	2016-07-26 17:52:00.720916+07	1	13	9	amd notebook	1	
-123	2016-07-26 18:08:48.853278+07	1	10	17	17 | 27 | 27 | 2 | monitors/27/	1	
-124	2016-07-26 18:10:37.511744+07	1	10	18	18 | 29 | 29 | 2 | /monitors/29/	1	
-125	2016-07-26 18:11:11.535903+07	1	10	19	19 | 31 | 31 | 2 | monitors/31/	1	
-126	2016-07-27 12:18:13.88577+07	1	13	10	21" монитор benq 12	1	
-127	2016-07-27 12:18:29.975545+07	1	13	11	19' монитор noname 31	1	
-128	2016-07-27 12:37:15.510832+07	1	10	11	11 | intel notebook | intel-notebook | 3 | /cpu/intel/intel-notebook/	2	Changed name and slug.
-129	2016-07-27 13:10:20.802919+07	1	12	2	Images object	1	
-130	2016-07-27 13:10:22.313899+07	1	10	12	12 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-131	2016-07-27 13:10:56.534134+07	1	10	20	20 | 34 | 34 | 2 | /monitors/34/	1	
-132	2016-07-27 13:11:34.54017+07	1	13	12	34	1	
-133	2016-07-27 13:18:10.878116+07	1	10	12	12 | Мониторы | monitors | 1 | /monitors/	2	No fields changed.
-134	2016-07-27 13:19:45.207201+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-135	2016-07-27 13:20:25.796323+07	1	12	3	Images object	1	
-136	2016-07-27 13:20:27.861382+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-137	2016-07-27 13:35:34.262987+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-138	2016-07-27 13:35:57.597261+07	1	10	12	12 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-139	2016-07-27 13:36:24.422416+07	1	12	4	Images object	1	
-140	2016-07-27 13:36:27.290848+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-141	2016-07-27 13:37:50.367199+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-142	2016-07-27 13:38:05.86908+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-143	2016-07-27 13:38:24.692578+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-144	2016-07-27 13:42:14.688406+07	1	10	20	20 | 34 | 34 | 2 | /monitors/34/	2	Changed default_image.
-145	2016-07-27 13:42:19.51027+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	No fields changed.
-146	2016-07-27 13:42:22.750028+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	No fields changed.
-147	2016-07-27 14:31:57.561687+07	1	13	1	intel i7	2	Changed image.
-148	2016-07-27 14:36:56.28201+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-149	2016-07-27 14:37:02.81723+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-150	2016-07-27 14:37:10.759585+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-151	2016-07-27 14:37:58.326642+07	1	10	20	20 | 34 | 34 | 2 | /monitors/34/	2	Changed default_image.
-152	2016-07-27 14:38:20.247542+07	1	10	13	13 | 19` | 19 | 2 | /monitors/19/	2	Changed default_image.
-153	2016-07-27 14:53:51.195064+07	1	13	13	19' монитор noname 31	1	
-154	2016-07-27 14:54:07.559909+07	1	13	13	19' монитор noname 31	2	Changed image.
-155	2016-07-27 14:54:36.7851+07	1	13	14	19' монитор noname 33	1	
-156	2016-07-27 14:54:55.24205+07	1	10	13	13 | 19` | 19 | 2 | /monitors/19/	2	Changed default_image.
-157	2016-07-27 14:55:06.313299+07	1	10	13	13 | 19` | 19 | 2 | /monitors/19/	2	Changed default_image.
-158	2016-07-27 14:56:24.718019+07	1	10	13	13 | 19` | 19 | 2 | /monitors/19/	2	Changed default_image.
-159	2016-07-27 14:57:22.947045+07	1	10	13	13 | 19` | 19 | 2 | /monitors/19/	2	Changed default_image.
-160	2016-07-27 14:58:55.457663+07	1	10	12	12 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-161	2016-07-27 15:04:06.753954+07	1	13	14	19' монитор noname 33	2	Changed image.
-162	2016-07-27 15:05:12.245381+07	1	13	14	19' монитор noname 33	2	Changed image.
-163	2016-07-27 15:05:29.922674+07	1	10	14	14 | 21 | 21 | 2 | /monitors/21/	2	Changed default_image.
-164	2016-07-27 15:13:42.208261+07	1	10	6	6 | intel | intel | 2 | /cpu/intel/	2	Changed default_image.
-165	2016-07-27 15:15:14.071538+07	1	10	6	6 | intel | intel | 2 | /cpu/intel/	2	Changed default_image.
-166	2016-07-27 15:15:22.528767+07	1	10	6	6 | intel | intel | 2 | /cpu/intel/	2	Changed default_image.
-167	2016-07-27 15:15:34.910476+07	1	10	11	11 | intel notebook | intel-notebook | 3 | /cpu/intel/intel-notebook/	2	Changed default_image.
-168	2016-07-27 15:15:39.910444+07	1	10	6	6 | intel | intel | 2 | /cpu/intel/	2	Changed default_image.
-169	2016-07-27 15:16:00.70841+07	1	10	11	11 | intel notebook | intel-notebook | 3 | /cpu/intel/intel-notebook/	2	Changed default_image.
-170	2016-07-27 15:16:15.710033+07	1	10	5	5 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-171	2016-07-27 15:18:37.285673+07	1	10	21	21 | Видео карты | video-karty | 1 | /video-karty/	1	
-172	2016-07-27 15:19:02.159246+07	1	10	22	22 | nvidia | nvidia | 2 | /video-karty/nvidia/	1	
-173	2016-07-27 15:19:26.396381+07	1	10	23	23 | radeon | radeon | 2 | /video-karty/radeon/	1	
-174	2016-07-27 15:19:37.076161+07	1	10	21	21 | Видео карты | video-karty | 1 | /video-karty/	2	Changed default_image.
-175	2016-07-27 15:49:41.01737+07	1	10	6	6 | intel | intel | 2 | /cpu/intel/	2	Changed default_image.
-176	2016-07-27 15:50:37.921557+07	1	10	24	24 | Блоки | bloki | 1 | /bloki/	1	
-177	2016-07-27 16:32:11.013647+07	1	10	22	22 | nvidia | nvidia | 2 | /video-karty/nvidia/	2	Changed default_image.
-178	2016-07-27 17:05:23.743154+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	1	
-179	2016-07-27 17:05:34.929008+07	1	10	2	2 | Процессоры | cpu | 1 | /cpu/	1	
-180	2016-07-27 17:05:53.509005+07	1	10	3	3 | 19 | 19 | 2 | /monitors/19/	1	
-181	2016-07-27 17:06:09.241304+07	1	10	2	2 | Процессоры | cpu | 1 | /cpu/	2	Changed default_image.
-182	2016-07-27 17:06:22.975048+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-183	2016-07-27 17:06:29.585571+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-184	2016-07-27 17:07:44.892428+07	1	10	4	4 | 21 | 21 | 2 | /monitors/21/	1	
-185	2016-07-27 17:08:09.118078+07	1	10	4	4 | 21 | 21 | 2 | /cpu/21/	2	Changed parent.
-186	2016-07-27 17:08:17.490248+07	1	10	4	4 | 21 | 21 | 2 | /monitors/21/	2	Changed parent.
-187	2016-07-27 17:09:36.143729+07	1	10	5	5 | intel | intel | 2 | /cpu/intel/	1	
-188	2016-07-27 17:10:08.575627+07	1	10	6	6 | amd | amd | 2 | /cpu/amd/	1	
-189	2016-07-27 17:11:05.191434+07	1	13	1	1 | 19' монитор noname 3	1	
-190	2016-07-27 17:22:05.697982+07	1	13	2	2 | 19' монитор noname 4	1	
-191	2016-07-27 17:22:55.573847+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-192	2016-07-27 17:23:05.667809+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-193	2016-07-27 18:32:06.661534+07	1	10	7	7 | Видео карты | video-karty | 1 | /video-karty/	1	
-194	2016-07-28 12:29:11.344264+07	1	10	8	8 | intel notebook | intel-notebook | 3 | /cpu/intel/intel-notebook/	1	
-195	2016-07-28 14:43:24.691167+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	Changed default_image.
-196	2016-07-28 14:44:20.867931+07	1	10	1	1 | Мониторы | monitors | 1 | /monitors/	2	No fields changed.
-197	2016-07-28 16:49:04.179223+07	1	10	1	1 | Мониторы | monitors | 	2	Changed default_image.
-198	2016-07-28 16:49:09.014445+07	1	10	3	3 | 19 | 19 | 	2	No fields changed.
-199	2016-07-28 16:56:13.253609+07	1	13	1	1 | 19' монитор noname 3	2	No fields changed.
-200	2016-07-28 16:56:34.271216+07	1	13	2	2 | 19' монитор noname 4	2	Changed image.
-201	2016-07-28 16:58:25.949154+07	1	13	1	1 | 19' монитор noname 3	2	Changed image.
-202	2016-07-28 17:01:56.424246+07	1	10	1	1 | Мониторы | monitors | 	2	Changed default_image.
-203	2016-07-28 17:02:11.077589+07	1	10	3	3 | 19 | 19 | 	2	Changed default_image.
-204	2016-07-28 17:08:44.40267+07	1	13	1	1 | 19' монитор noname 3	2	Changed image.
-205	2016-07-28 17:08:57.420989+07	1	13	1	1 | 19' монитор noname 3	2	Changed image.
-206	2016-07-28 17:09:23.472244+07	1	13	3	3 | 21" монитор noname	1	
-207	2016-07-28 17:09:37.865707+07	1	10	3	3 | 19 | 19 | 	2	Changed default_image.
-208	2016-07-28 17:09:54.357704+07	1	13	1	1 | 19' монитор noname 3	2	Changed image.
-209	2016-07-28 17:19:23.290945+07	1	13	4	4 | Монитор без категории без непонятных причин	1	
-210	2016-07-28 17:19:44.172192+07	1	13	4	4 | Монитор без категории хъъъ	2	Changed name.
-211	2016-07-28 17:20:45.963052+07	1	10	1	1 | Мониторы | monitors | 	2	Changed default_image.
-212	2016-07-28 17:21:04.713984+07	1	13	3	3 | 21" монитор noname	2	Changed image.
-213	2016-07-29 13:16:23.332785+07	1	10	9	9 | test_hight_level_cat | 	1	
-214	2016-07-29 15:55:34.269141+07	1	10	9	9 | test_hight_level_cat | 	3	
-215	2016-07-29 16:01:10.455473+07	1	13	5	5 | Процессоры asd	1	
-216	2016-07-29 16:13:05.791151+07	1	13	6	6 | 21" монитор noname 123	1	
-217	2016-07-29 16:13:32.024646+07	1	13	7	7 | 19' монитор noname 3	1	
-218	2016-07-29 16:13:52.819567+07	1	13	8	8 | 19' монитор noname 4	1	
-219	2016-07-29 16:14:11.14068+07	1	13	9	9 | 19' монитор noname 31	1	
-220	2016-07-29 16:14:29.584728+07	1	10	3	3 | 19 | 	2	Changed default_image.
-221	2016-07-29 16:15:02.404949+07	1	13	10	10 | 19' монитор noname 3 1 1 	1	
-222	2016-07-29 16:15:25.091479+07	1	13	11	11 | 19' монитор noname 123	1	
-223	2016-07-29 16:15:53.387602+07	1	13	12	12 | 19' монитор noname 3111	1	
-224	2016-07-29 16:17:16.633672+07	1	13	13	13 | 19' монитор noname 35	1	
-225	2016-07-29 16:17:40.633785+07	1	13	14	14 | 19' монитор noname 123	1	
-226	2016-07-29 16:18:00.730569+07	1	13	15	15 | 19' монитор noname 123	1	
-227	2016-07-29 16:18:21.266368+07	1	13	16	16 | 19' монитор noname 3	1	
-228	2016-07-29 16:18:32.464068+07	1	13	17	17 | 19' монитор noname 3	1	
-229	2016-08-01 18:17:41.000124+07	1	10	15	15 | testset | 2	3	
-230	2016-08-01 18:17:41.002638+07	1	10	14	14 | testset | 4	3	
-231	2016-08-01 18:17:41.00432+07	1	10	12	12 | testset | 4	3	
-232	2016-08-01 18:17:41.005949+07	1	10	10	10 | testset | 4	3	
-233	2016-08-03 14:50:13.684495+07	1	12	5	5	1	
-234	2016-08-03 14:50:15.195886+07	1	13	17	17 - 19' монитор noname 3	2	Changed image.
+1	2016-07-23 23:51:08.919098+07	1	11	1	123|http://123.0.0.0/dsa/ds/|	1	
+2	2016-07-23 23:52:13.380385+07	1	12	1	Images object	1	
+3	2016-07-23 23:53:28.269654+07	1	12	2	Images object	1	
+4	2016-07-24 20:58:18.975164+07	1	11	1	Cdm|http://127.0.0.1:8000/monitors/|	1	
+5	2016-07-24 21:00:01.606223+07	1	11	2	19|http://127.0.0.1:8000/monitors/19|	1	
+6	2016-07-24 21:55:42.478387+07	1	11	None	1|asd|	1	
+7	2016-07-24 21:56:02.12153+07	1	11	None	23|/dsad/1|	1	
+8	2016-07-24 21:57:22.121067+07	1	11	2	13|qwe|	1	
+9	2016-07-24 21:57:41.508453+07	1	11	3	123|123123123|	1	
+10	2016-07-24 22:02:21.59008+07	1	11	4	123 | ///312/31/ | 	1	
+11	2016-07-24 22:23:29.780562+07	1	11	4	123 | /312/ | 	2	Changed url.
+12	2016-07-24 22:28:27.057366+07	1	11	4	123 | 312/ | 	2	Changed url.
+13	2016-07-24 22:33:48.813061+07	1	11	4	123 | 312/ | 	2	No fields changed.
+14	2016-07-24 23:06:22.152037+07	1	11	4	123 | 312/qwe | 	2	Changed parent.
+15	2016-07-24 23:07:20.213805+07	1	11	5	monitors | monitors/ | 	1	
+16	2016-07-24 23:08:19.017085+07	1	12	1	Images object	1	
+17	2016-07-24 23:10:24.910565+07	1	12	2	Images object	1	
+18	2016-07-24 23:10:54.487091+07	1	13	4	Product object	1	
+19	2016-07-24 23:12:13.266075+07	1	11	5	monitors | /monitors/ | 	2	Changed url.
+20	2016-07-25 07:25:34.762472+07	1	11	1	Мониторы | /monitors/ | 	1	
+21	2016-07-25 07:25:53.854079+07	1	11	2	19 | 19/monitors// | 	1	
+22	2016-07-25 07:27:23.74215+07	1	11	3	21 | /monitors/21/ | 	1	
+23	2016-07-25 07:33:19.345082+07	1	11	4	12 | /monitors/sdfa/ | 	1	
+24	2016-07-25 07:34:16.510275+07	1	11	5	TFT | /monitors/21/tft/ | 	1	
+25	2016-07-25 07:34:32.923995+07	1	11	6	19 | /monitors/21/tft/ew/ | 	1	
+26	2016-07-25 07:41:12.344003+07	1	11	5	TFT | /monitors/21/tft/ | 3	3	
+27	2016-07-25 07:41:43.433448+07	1	11	2	19 | 19/monitors// | 2	3	
+28	2016-07-25 07:59:14.888555+07	1	11	7	12 | /monitors/21/12/ | 3	1	
+213	2016-07-29 19:36:25.623096+07	1	13	5	5 | 19 vjy 1	1	
+214	2016-07-29 19:36:42.964988+07	1	13	6	6 | 19 vjy 2	1	
+215	2016-07-29 19:37:03.456369+07	1	13	7	7 | 19 vjy 3	1	
+216	2016-07-29 19:37:17.664118+07	1	13	8	8 | 19 vjy 4	1	
+217	2016-07-29 19:37:40.005912+07	1	13	9	9 | 19 vjy 4	1	
+218	2016-07-29 19:38:12.549994+07	1	13	10	10 | 19 vjy 5	1	
+219	2016-07-29 19:38:26.523115+07	1	13	11	11 | 19 vjy 5	1	
+220	2016-07-29 19:38:39.384912+07	1	13	12	12 | 19 vjy 6	1	
+221	2016-07-29 19:38:59.838749+07	1	13	13	13 | 19 vjy 7	1	
+222	2016-07-29 19:39:09.901579+07	1	13	14	14 | 19 vjy 6	1	
+223	2016-07-29 20:21:09.686087+07	1	13	15	15 | 19 фыв 	1	
+224	2016-07-31 09:41:16.873322+07	1	11	9	9 | test_cat | 	1	
+225	2016-07-31 23:58:38.954586+07	1	11	9	9 | test_cat1 | 3	2	Changed name and parent.
+226	2016-08-01 00:01:28.47257+07	1	11	10	10 | тек | 1	1	
+227	2016-08-04 09:06:53.66237+07	1	13	16	16 - 1	1	
+228	2016-08-04 09:26:06.770114+07	1	12	5	5	1	
+229	2016-08-04 09:27:09.016289+07	1	12	6	6	1	
+230	2016-08-04 09:27:11.106945+07	1	11	1	1 - Мониторы	2	Changed default_image.
+231	2016-08-04 09:27:46.964184+07	1	11	10	10 - тек	3	
+232	2016-08-04 09:28:08.785027+07	1	12	7	7	1	
+233	2016-08-04 09:28:11.542111+07	1	11	8	8 - intel notebook	2	Changed default_image.
+234	2016-08-04 09:28:18.312618+07	1	11	6	6 - amd	2	Changed default_image.
+235	2016-08-04 09:28:33.395388+07	1	11	5	5 - intel	2	Changed default_image.
+236	2016-08-04 09:29:13.404713+07	1	13	3	3 - 21" монитор noname	2	Changed image.
+237	2016-08-04 09:29:26.116309+07	1	11	2	2 - Процессоры	2	Changed default_image.
+238	2016-08-04 09:29:33.112964+07	1	12	5	5	3	
+239	2016-08-04 09:29:33.143604+07	1	12	2	2	3	
+240	2016-08-04 09:29:33.154845+07	1	12	1	1	3	
+241	2016-08-04 09:30:23.969876+07	1	11	9	9 - test_cat1	3	
+242	2016-08-04 09:32:05.232995+07	1	13	15	15 - 19" noname	2	Changed name and description.
+243	2016-08-04 09:32:53.697171+07	1	13	14	14 - 19" noname 1	2	Changed name and description.
+244	2016-08-04 09:33:04.339935+07	1	13	13	13 - 19" noname 2	2	Changed name.
+245	2016-08-04 09:33:12.751041+07	1	13	12	12 - 19" noname 3	2	Changed name.
+246	2016-08-04 09:33:24.209198+07	1	13	11	11 - 19" noname 4	2	Changed name.
+247	2016-08-04 09:33:39.799408+07	1	13	10	10 - 19" noname 5	2	Changed name.
+248	2016-08-04 09:33:51.661565+07	1	13	9	9 - 19" noname 6	2	Changed name.
+249	2016-08-04 09:33:58.762725+07	1	13	8	8 - 19" noname 7	2	Changed name.
+250	2016-08-04 09:34:10.306958+07	1	13	7	7 - 19" noname 8	2	Changed name.
+251	2016-08-04 09:34:18.022957+07	1	13	6	6 - 19" noname 8	2	Changed name.
+252	2016-08-04 09:34:23.438834+07	1	13	6	6 - 19" noname 9	2	Changed name.
+253	2016-08-04 09:34:31.07183+07	1	13	5	5 - 19" noname 10	2	Changed name.
+254	2016-08-04 09:34:37.821908+07	1	13	4	4 - Монитор без категории	2	Changed name.
+255	2016-08-04 09:34:52.128137+07	1	13	3	3 - 21" noname	2	Changed name.
+256	2016-08-04 09:35:00.51551+07	1	13	2	2 - 19" noname 11	2	Changed name.
+257	2016-08-04 09:35:08.263408+07	1	13	1	1 - 19" noname 12	2	Changed name.
+258	2016-08-04 09:36:35.586529+07	1	13	17	17 - Процесор intel	1	
+259	2016-08-04 09:37:03.618016+07	1	13	18	18 - Видео карта	1	
+260	2016-08-04 09:37:44.476399+07	1	12	8	8	1	
+261	2016-08-04 09:37:46.526483+07	1	11	7	7 - Видео карты	2	Changed default_image.
 \.
 
 
@@ -1100,7 +945,7 @@ COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, obj
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 234, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 261, true);
 
 
 --
@@ -1108,17 +953,19 @@ SELECT pg_catalog.setval('django_admin_log_id_seq', 234, true);
 --
 
 COPY django_content_type (id, name, app_label, model) FROM stdin;
-1	permission	auth	permission
-2	group	auth	group
-3	user	auth	user
-4	content type	contenttypes	contenttype
-5	session	sessions	session
-6	site	sites	site
-10	categories	testapp	categories
-11	log entry	admin	logentry
+1	log entry	admin	logentry
+2	permission	auth	permission
+3	group	auth	group
+4	user	auth	user
+5	content type	contenttypes	contenttype
+6	session	sessions	session
+7	site	sites	site
+8	publisher	testapp	publisher
+9	author	testapp	author
+10	book	testapp	book
+11	categories	testapp	categories
 12	images	testapp	images
 13	product	testapp	product
-14	test	testapp	test
 \.
 
 
@@ -1134,6 +981,7 @@ SELECT pg_catalog.setval('django_content_type_id_seq', 14, true);
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
+820634d2dbe8ee6df033a293ae08bacf	YzA2NDFmYzQwMDNmYzMxMzYyMTUyMTQ1M2M0ZmFmMzgxNzkxNzA4YzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2016-08-06 23:48:28.105973+07
 a9ca8dd779c57d24101a253517461d79	YzA2NDFmYzQwMDNmYzMxMzYyMTUyMTQ1M2M0ZmFmMzgxNzkxNzA4YzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2016-08-05 15:21:15.898438+07
 \.
 
@@ -1204,14 +1052,14 @@ SELECT pg_catalog.setval('testapp_book_id_seq', 1, false);
 --
 
 COPY testapp_categories (id, name, parent_id, slug, default_image_id) FROM stdin;
-2	Процессоры	\N	cpu	1
-5	intel	2	intel	1
-6	amd	2	amd	1
-7	Видео карты	\N	video-karty	\N
-8	intel notebook	5	intel-notebook	1
 4	21	1	21	\N
-1	Мониторы	\N	monitors	1
-3	19	1	19	2
+3	19	1	19	\N
+1	Мониторы	\N	monitors	6
+8	intel notebook	5	intel-notebook	7
+6	amd	2	amd	\N
+5	intel	2	intel	7
+2	Процессоры	\N	cpu	7
+7	Видео карты	\N	video-karty	8
 \.
 
 
@@ -1219,7 +1067,7 @@ COPY testapp_categories (id, name, parent_id, slug, default_image_id) FROM stdin
 -- Name: testapp_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
 --
 
-SELECT pg_catalog.setval('testapp_categories_id_seq', 15, true);
+SELECT pg_catalog.setval('testapp_categories_id_seq', 10, true);
 
 
 --
@@ -1227,11 +1075,9 @@ SELECT pg_catalog.setval('testapp_categories_id_seq', 15, true);
 --
 
 COPY testapp_images (id, image) FROM stdin;
-1	pics/cpu.png
-2	pics/lcd_monitor.png
-3	pics/Selection_001.png
-4	pics/Selection_001_FG7JTSN.png
-5	pics/Workspace_1_002.png
+6	pics/mon.duckduckgo.com_MhIr3R7.png
+7	pics/images.duckduckgo.com.png
+8	pics/video.jpeg
 \.
 
 
@@ -1239,7 +1085,7 @@ COPY testapp_images (id, image) FROM stdin;
 -- Name: testapp_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
 --
 
-SELECT pg_catalog.setval('testapp_images_id_seq', 5, true);
+SELECT pg_catalog.setval('testapp_images_id_seq', 8, true);
 
 
 --
@@ -1247,23 +1093,23 @@ SELECT pg_catalog.setval('testapp_images_id_seq', 5, true);
 --
 
 COPY testapp_product (id, name, category_id, count, price, description, image_id) FROM stdin;
-5	Процессоры asd	2	1	1	qaweqwe qwe qw 	\N
-2	19' монитор noname 4	3	1	1	asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d 	\N
-1	19' монитор noname 3	3	1	1	123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 	\N
-4	Монитор без категории хъъъ	1	1	1	123 123 213 123	\N
-3	21" монитор noname	4	1	1	12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 	2
-6	21" монитор noname 123	4	1	1	dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa dsadas as sa 	\N
-7	19' монитор noname 3	3	1	1	1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 1 12 12 	\N
-8	19' монитор noname 4	3	1	1	1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 1 2 213  1 21 	\N
-9	19' монитор noname 31	3	1	1	1 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 11 23 123 1	\N
-10	19' монитор noname 3 1 1 	3	1	1	1 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 1231 23 123	\N
-11	19' монитор noname 123	3	1	1	eqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw eeqw eqw qw e	\N
-12	19' монитор noname 3111	3	1	1	12 12 1 21 2 12 12  12  12 1 21 2312 33 21 123	\N
-13	19' монитор noname 35	3	1	1	123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 	\N
-14	19' монитор noname 123	3	12	12	112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3112 32 3	\N
-15	19' монитор noname 123	3	1	1	12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 12 	\N
-16	19' монитор noname 3	3	12	123	 qw e qw e qw e qw e qw e qw e qw e qw e qw e qw e qw e qw e qw e qw e	\N
-17	19' монитор noname 3	3	1	1	asd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as dasd as d	5
+15	19" noname	3	1	1	Монитор без имени	\N
+14	19" noname 1	3	1	1	19" noname	\N
+13	19" noname 2	3	1	1	12 4124 12 4	\N
+12	19" noname 3	3	1	1	19 vjy 6 19 vjy 619 vjy 619 vjy 619 vjy 619 vjy 619 vjy 619 vjy 619 vjy 619 vjy 619 vjy 6	\N
+11	19" noname 4	3	1	1	19 vjy 4 19 vjy 419 vjy 419 vjy 4	\N
+10	19" noname 5	3	1	1	1312 319 vjy 4	\N
+9	19" noname 6	3	1	1	19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 19 vjy 3 	\N
+8	19" noname 7	3	1	1	1123123 1 23 123 12	\N
+7	19" noname 8	3	1	1	19 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 319 vjy 3	\N
+6	19" noname 9	3	1	1	12 312 32112 312 32112 312 32112 312 32112 312 32112 312 32112 312 32112 312 32112 312 32112 312 32112 312 321	\N
+5	19" noname 10	3	1	1	19 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 119 vjy 1	\N
+4	Монитор без категории	1	1	1	123 123 213 123	\N
+3	21" noname	4	1	1	12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 12 1 212 	\N
+2	19" noname 11	3	1	1	asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d asdas d 	\N
+1	19" noname 12	3	1	1	123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 123123123 	\N
+17	Процесор intel	5	1	1	11	\N
+18	Видео карта	7	1	1	Карта	\N
 \.
 
 
@@ -1271,7 +1117,7 @@ COPY testapp_product (id, name, category_id, count, price, description, image_id
 -- Name: testapp_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user
 --
 
-SELECT pg_catalog.setval('testapp_product_id_seq', 17, true);
+SELECT pg_catalog.setval('testapp_product_id_seq', 18, true);
 
 
 --
@@ -1320,7 +1166,7 @@ SELECT pg_catalog.setval('testapp_publisher_id_seq', 30, true);
 
 
 --
--- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group
@@ -1328,7 +1174,7 @@ ALTER TABLE ONLY auth_group
 
 
 --
--- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1336,7 +1182,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1344,7 +1190,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group
@@ -1352,7 +1198,7 @@ ALTER TABLE ONLY auth_group
 
 
 --
--- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_permission
@@ -1360,7 +1206,7 @@ ALTER TABLE ONLY auth_permission
 
 
 --
--- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_permission
@@ -1368,7 +1214,7 @@ ALTER TABLE ONLY auth_permission
 
 
 --
--- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1376,7 +1222,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1384,7 +1230,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user
@@ -1392,7 +1238,7 @@ ALTER TABLE ONLY auth_user
 
 
 --
--- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1400,7 +1246,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1408,7 +1254,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user
@@ -1416,7 +1262,7 @@ ALTER TABLE ONLY auth_user
 
 
 --
--- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY django_admin_log
@@ -1424,7 +1270,7 @@ ALTER TABLE ONLY django_admin_log
 
 
 --
--- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY django_content_type
@@ -1432,7 +1278,7 @@ ALTER TABLE ONLY django_content_type
 
 
 --
--- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY django_content_type
@@ -1440,7 +1286,7 @@ ALTER TABLE ONLY django_content_type
 
 
 --
--- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY django_session
@@ -1448,7 +1294,7 @@ ALTER TABLE ONLY django_session
 
 
 --
--- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY django_site
@@ -1456,7 +1302,7 @@ ALTER TABLE ONLY django_site
 
 
 --
--- Name: testapp_author_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_author_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_author
@@ -1464,7 +1310,7 @@ ALTER TABLE ONLY testapp_author
 
 
 --
--- Name: testapp_book_authors_book_id_author_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_book_authors_book_id_author_id_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_book_authors
@@ -1472,7 +1318,7 @@ ALTER TABLE ONLY testapp_book_authors
 
 
 --
--- Name: testapp_book_authors_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_book_authors_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_book_authors
@@ -1480,7 +1326,7 @@ ALTER TABLE ONLY testapp_book_authors
 
 
 --
--- Name: testapp_book_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_book_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_book
@@ -1488,7 +1334,7 @@ ALTER TABLE ONLY testapp_book
 
 
 --
--- Name: testapp_categories_id_default_image_id_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_categories_id_default_image_id_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_categories
@@ -1496,7 +1342,7 @@ ALTER TABLE ONLY testapp_categories
 
 
 --
--- Name: testapp_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_categories
@@ -1504,7 +1350,7 @@ ALTER TABLE ONLY testapp_categories
 
 
 --
--- Name: testapp_categories_slug_key; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_categories_slug_key; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_categories
@@ -1512,7 +1358,7 @@ ALTER TABLE ONLY testapp_categories
 
 
 --
--- Name: testapp_images_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_images_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_images
@@ -1520,7 +1366,7 @@ ALTER TABLE ONLY testapp_images
 
 
 --
--- Name: testapp_product_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_product_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_product
@@ -1528,7 +1374,7 @@ ALTER TABLE ONLY testapp_product
 
 
 --
--- Name: testapp_publisher_pkey; Type: CONSTRAINT; Schema: public; Owner: user
+-- Name: testapp_publisher_pkey; Type: CONSTRAINT; Schema: public; Owner: user; Tablespace: 
 --
 
 ALTER TABLE ONLY testapp_publisher
@@ -1536,119 +1382,119 @@ ALTER TABLE ONLY testapp_publisher
 
 
 --
--- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
 
 
 --
--- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
 
 
 --
--- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
 
 
 --
--- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
 
 
 --
--- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: user
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
 
 
 --
--- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: user
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
 
 
 --
--- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: user
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
 
 
 --
--- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: user
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
 
 
 --
--- Name: testapp_book_authors_author_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_book_authors_author_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_book_authors_author_id ON testapp_book_authors USING btree (author_id);
 
 
 --
--- Name: testapp_book_authors_book_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_book_authors_book_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_book_authors_book_id ON testapp_book_authors USING btree (book_id);
 
 
 --
--- Name: testapp_book_publisher_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_book_publisher_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_book_publisher_id ON testapp_book USING btree (publisher_id);
 
 
 --
--- Name: testapp_categories_default_image_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_categories_default_image_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_categories_default_image_id ON testapp_categories USING btree (default_image_id);
 
 
 --
--- Name: testapp_categories_parent_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_categories_parent_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_categories_parent_id ON testapp_categories USING btree (parent_id);
 
 
 --
--- Name: testapp_product_category_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_product_category_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_product_category_id ON testapp_product USING btree (category_id);
 
 
 --
--- Name: testapp_product_image_id; Type: INDEX; Schema: public; Owner: user
+-- Name: testapp_product_image_id; Type: INDEX; Schema: public; Owner: user; Tablespace: 
 --
 
 CREATE INDEX testapp_product_image_id ON testapp_product USING btree (image_id);
@@ -1684,6 +1530,14 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 ALTER TABLE ONLY testapp_book_authors
     ADD CONSTRAINT book_id_refs_id_cd1907c0 FOREIGN KEY (book_id) REFERENCES testapp_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_288599e6; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT content_type_id_refs_id_288599e6 FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -1772,6 +1626,14 @@ ALTER TABLE ONLY testapp_product
 
 ALTER TABLE ONLY auth_user_groups
     ADD CONSTRAINT user_id_refs_id_831107f1 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_c8665aa; Type: FK CONSTRAINT; Schema: public; Owner: user
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT user_id_refs_id_c8665aa FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
