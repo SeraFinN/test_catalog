@@ -1,5 +1,6 @@
 # coding=utf-8
 from datetime import datetime
+from django.utils import timezone
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -22,14 +23,6 @@ class Categories(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.id, self.name)
 
-    def get_image(self):
-        if not self.default_image:
-            category = self.parent
-            while not category.default_image:
-                category = category.parent
-            return category.default_image
-        return self.default_image
-
     def clean(self):
         if self.id and self.id == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
@@ -37,6 +30,14 @@ class Categories(models.Model):
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
             raise ValidationError('Root catalog must have image')
+
+    def get_image(self):
+        if not self.default_image:
+            category = self.parent
+            while not category.default_image:
+                category = category.parent
+            return category.default_image
+        return self.default_image
 
     def get_absolute_url(self):
         url = '/'
@@ -48,7 +49,12 @@ class Categories(models.Model):
         return url
 
     def get_level(self):
-        return len(self.get_breadcrumbs())
+        level = 0
+        category = self
+        while category:
+            level += 1
+            category = category.parent
+        return level
 
     def get_breadcrumbs(self):
         breadcrumbs = []
@@ -57,13 +63,6 @@ class Categories(models.Model):
             breadcrumbs = [(category.name, category.get_absolute_url(), category.slug)] + breadcrumbs
             category = category.parent
         return breadcrumbs
-
-
-class AvailableProductManager(models.Manager):
-    def get_query_set(self):
-        query_set = super(AvailableProductManager, self).get_query_set()
-        # assert False, query_set#.filter(release_date__lte=datetime.now())
-        return query_set.filter(release_date__lte=datetime.now())
 
 
 class Product(models.Model):
@@ -76,11 +75,8 @@ class Product(models.Model):
     is_hidden = models.BooleanField(default=False)
     image = models.ForeignKey(Images, blank=True, null=True)
 
-    objects = models.Manager()
-    available = AvailableProductManager()
-
     def __unicode__(self):
-        return "%r - %r" % (self.release_date, datetime.utcnow())
+        return "%r - %r" % (self.id, self.name)
 
     def get_image(self):
         if not self.image:
@@ -88,4 +84,4 @@ class Product(models.Model):
         return self.image
 
     def get_absolute_url(self):
-        return reverse("testapp.views.product_details", args=[self.id])
+        return reverse("product_detail", args=[self.id])

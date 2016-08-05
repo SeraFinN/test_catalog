@@ -27,9 +27,8 @@
 
     {% block page %}
 
-        <div id="sidebar">
-            {% include "categories.html" %}
-        </div>
+        {% block sidebar %}
+        {% endblock %}
 
         <div id="content">
             {% block breadcrumbs %}
