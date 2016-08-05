@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="dataSourceStorageLocal">
-    <data-source name="Django default" uuid="e0b110e2-3459-4868-bb17-6065cc44443e">
-      <user-name>postgres</user-name>
-      <user-password>df9b</user-password>
-    </data-source>
-  </component>
-</project>
