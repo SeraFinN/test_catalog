@@ -84,4 +84,4 @@ class Product(models.Model):
         return self.image
 
     def get_absolute_url(self):
-        return reverse("testapp.views.product_details", args=[self.id])
+        return reverse("product_detail", args=[self.id])

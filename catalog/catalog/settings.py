@@ -63,7 +63,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(_PATH, 'files', 'static')
+STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -71,6 +71,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(_PATH, 'files', 'static'),
     # STATIC_ROOT,
     # os.path.join(_PATH, 'files', 'static'),
     # '/home/serafinn/djangoCatalog/catalog/testapp/static',
@@ -114,7 +115,7 @@ ROOT_URLCONF = 'catalog.urls'
 WSGI_APPLICATION = 'catalog.wsgi.application'
 
 TEMPLATE_DIRS = (
-    'templates',
+    os.path.join(_PATH, '..', 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -123,7 +124,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
-    'testapp.contextprocessors.categories.categories',
+    'testapp.context_processors.categories.categories',
 )
 
 INSTALLED_APPS = (

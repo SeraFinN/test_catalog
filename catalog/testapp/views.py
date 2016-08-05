@@ -7,6 +7,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 
 from testapp.models import Product, Categories
 
@@ -62,6 +63,20 @@ class SearchListView(FilteredListView):
         return context
 
 
+class ProductDetail(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'product_details.html'
+
+    def get_context_data(self, **kwargs):
+        # assert False, self.object.category.get_breadcrumbs()
+        context = super(ProductDetail, self).get_context_data(**kwargs)
+        context['title'] = self.object.name
+        context['product'] = self.object
+        context['breadcrumbs'] = self.object.category.get_breadcrumbs() + [(self.object.name, None)],
+        return context
+
+
 def main(request):
     context = {
         'title': u'Электронный каталог',
@@ -71,7 +86,7 @@ def main(request):
 
 
 def product_details(request, **params):
-    product = get_object_or_404(Product, id=params['id'])
+    product = get_object_or_404(Product, id=params['pk'])
     context = {
         'product': product,
         'title': product.name,
@@ -113,8 +128,8 @@ def filldb(request):
     for category in categories:
         if Product.objects.all().filter(category=category).count() == 0:
             for i in range(100):
-                description_sourse = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.whitespace
-                token = ''.join(random.choice(description_sourse) for x in range(1000))
+                description_source = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.whitespace
+                token = ''.join(random.choice(description_source) for x in range(1000))
                 product = Product(name='%s %s' % (category, i), category=category, image=None, count=1, price=1,
                                   description=token, is_hidden=bool(random.getrandbits(1))
                                   )

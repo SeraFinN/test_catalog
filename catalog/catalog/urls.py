@@ -2,11 +2,11 @@
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
-from django.conf.urls import patterns, include
+from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.auth.views import login, logout
 
-from testapp.views import product_details, main, filldb, ProductsListView, SearchListView
+from testapp.views import product_details, main, filldb, ProductsListView, SearchListView, ProductDetail
 
 admin.autodiscover()
 
@@ -19,7 +19,7 @@ urlpatterns += patterns((),
                                                'extra_context': {'breadcrumbs': (u"Регистрация", None),
                                                                  'title': u'Регистрация'}}),
                         (r'^logout/$', logout),
-                        (r'^product/(?P<id>\d+)/?$', product_details),
+                        url(r'^product/(?P<pk>\d+)/?$', product_details, name='product_detail'),
                         (r'^$', main),
                         (r'^search/$', SearchListView.as_view()),
                         (r'^filldb/$', filldb),
