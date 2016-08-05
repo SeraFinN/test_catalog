@@ -1,6 +1,7 @@
 # coding=utf-8
 import random
 import string
+from datetime import datetime
 
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
@@ -17,7 +18,7 @@ class FilteredListView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        products = self.model.objects.all()
+        products = self.model.objects.all().filter(release_date__lt=datetime.now())
         if not self.request.user.is_authenticated():
             products = self.model.objects.exclude(is_hidden=True)
             return products

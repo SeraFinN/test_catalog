@@ -1,5 +1,6 @@
 # coding=utf-8
 from datetime import datetime
+from django.utils import timezone
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -64,13 +65,6 @@ class Categories(models.Model):
         return breadcrumbs
 
 
-class AvailableProductManager(models.Manager):
-    def get_query_set(self):
-        query_set = super(AvailableProductManager, self).get_query_set()
-        # assert False, query_set#.filter(release_date__lte=datetime.now())
-        return query_set#.filter(release_date__lte=datetime.now())
-
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Categories)
@@ -81,11 +75,8 @@ class Product(models.Model):
     is_hidden = models.BooleanField(default=False)
     image = models.ForeignKey(Images, blank=True, null=True)
 
-    objects = models.Manager()
-    available = AvailableProductManager()
-
     def __unicode__(self):
-        return "%r - %r" % (self.release_date, datetime.utcnow())
+        return "%r - %r" % (self.id, self.name)
 
     def get_image(self):
         if not self.image:
