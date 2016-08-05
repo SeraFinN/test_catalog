@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from testapp.models import Categories
 
 
@@ -11,7 +13,11 @@ def prepare_data(items):
     def to_list(root, level):
         category_list = []
         for category in sorted(father_childs[root]):
-            category['url'] = Categories.objects.get(id=category['id']).get_absolute_url()
+            try:
+                current_category = Categories.objects.get(id=category['id'])
+            except ObjectDoesNotExist:
+                continue
+            category['url'] = current_category.get_absolute_url()
             category['level'] = level
             category_list.append(category)
             sub_list = to_list(category['id'], level + 1)

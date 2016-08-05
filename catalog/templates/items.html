@@ -14,22 +14,23 @@
         {% endfor %}
     </table>
 
-
-    <div class="pagination">
+    {% if is_paginated %}
+        <div class="pagination">
         <span class="step-links">
-            {% if item_list.has_previous %}
-                <a href="?{{ item_list.previous_page_number|add_get_param:request  }}">&lt;&lt;&lt;Назад</a>
+            {% if page_obj.has_previous %}
+                <a href="?{{ page_obj.previous_page_number|add_get_param:request  }}">&lt;&lt;&lt;Назад</a>
             {% endif %}
 
             <span class="current">
-                {{ item_list.number }} из {{ item_list.paginator.num_pages }}
+                {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
             </span>
 
-            {% if item_list.has_next %}
-                <a href="?{{ item_list.next_page_number|add_get_param:request }}">Вперед&gt;&gt;&gt;</a>
+            {% if page_obj.has_next %}
+                <a href="?{{ page_obj.next_page_number|add_get_param:request }}">Вперед&gt;&gt;&gt;</a>
             {% endif %}
         </span>
-    </div>
+        </div>
+    {% endif %}
 {% else %}
     <div>Нет элементов</div>
 {% endif %}

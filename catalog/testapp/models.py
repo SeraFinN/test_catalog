@@ -22,14 +22,6 @@ class Categories(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.id, self.name)
 
-    def get_image(self):
-        if not self.default_image:
-            category = self.parent
-            while not category.default_image:
-                category = category.parent
-            return category.default_image
-        return self.default_image
-
     def clean(self):
         if self.id and self.id == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
@@ -37,6 +29,14 @@ class Categories(models.Model):
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
             raise ValidationError('Root catalog must have image')
+
+    def get_image(self):
+        if not self.default_image:
+            category = self.parent
+            while not category.default_image:
+                category = category.parent
+            return category.default_image
+        return self.default_image
 
     def get_absolute_url(self):
         url = '/'
@@ -48,7 +48,12 @@ class Categories(models.Model):
         return url
 
     def get_level(self):
-        return len(self.get_breadcrumbs())
+        level = 0
+        category = self
+        while category:
+            level += 1
+            category = category.parent
+        return level
 
     def get_breadcrumbs(self):
         breadcrumbs = []
@@ -63,7 +68,7 @@ class AvailableProductManager(models.Manager):
     def get_query_set(self):
         query_set = super(AvailableProductManager, self).get_query_set()
         # assert False, query_set#.filter(release_date__lte=datetime.now())
-        return query_set.filter(release_date__lte=datetime.now())
+        return query_set#.filter(release_date__lte=datetime.now())
 
 
 class Product(models.Model):
