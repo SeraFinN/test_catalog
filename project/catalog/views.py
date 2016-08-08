@@ -2,12 +2,13 @@
 import random
 import string
 
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 
-from testapp.models import Product, Categories
-from testapp.pagination import get_page
+from catalog.models import Product, Categories
+from catalog.pagination import get_page
 
 
 def main(request):
@@ -32,7 +33,6 @@ def product_list(request, **params):
     current_category = get_object_or_404(Categories, slug=params.get('slug'))
     if request.path != current_category.get_absolute_url():
         raise Http404
-
     products = Product.released.for_user(request.user).filter(category=current_category)
     context = {
         'title': u'Категория - %s' % current_category.name,

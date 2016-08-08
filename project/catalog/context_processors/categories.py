@@ -1,5 +1,5 @@
-from testapp.models import Categories
-from testapp.formater import prepare_data
+from catalog.models import Categories
+from catalog.formater import prepare_data
 
 
 def categories(request):

@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from django.core.exceptions import ObjectDoesNotExist
 
-from testapp.models import Categories
+from catalog.models import Categories
 
 
 def prepare_data(items):

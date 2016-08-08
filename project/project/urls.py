@@ -6,7 +6,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout, login
 
-from testapp.views import product_details, main, fill_db, product_list, search
+from catalog.views import product_details, main, product_list, search, fill_db
 
 admin.autodiscover()
 
@@ -15,10 +15,10 @@ urlpatterns = staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
 urlpatterns += patterns((),
                         (r'^admin/', include(admin.site.urls)),
-                        (r'^login/$',  login, {'template_name': 'login.html',
-                                               'extra_context': {'title': u'Авторизация',
-                                                                 'breadcrumbs': [(u'Авторизация', None)]
-                                                                 }}),
+                        (r'^login/$', login, {'template_name': 'login.html',
+                                              'extra_context': {'title': u'Авторизация',
+                                                                'breadcrumbs': [(u'Авторизация', None)]
+                                                                }}),
                         (r'^logout/$', logout),
                         url(r'^product/(?P<pk>\d+)/?$', product_details, name='product_detail'),
                         (r'^$', main),

@@ -71,7 +71,7 @@ class ReleasedProductManager(Manager):
 
     def for_user(self, user):
         is_authorized = user.is_authenticated()
-        return self.get_query_set() if is_authorized else self.get_query_set().exclude(is_hidden=True)
+        return self.all() if is_authorized else self.exclude(is_hidden=True)
 
 
 class Product(models.Model):
@@ -81,7 +81,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
     release_date = models.DateTimeField(default=datetime.now, blank=True, null=True, verbose_name='Начало продаж')
-    is_hidden = models.BooleanField(default=False, verbose_name='Только для авторизованных')
+    is_hidden = models.BooleanField(default=False, verbose_name='Cкрыть на сайте')
     image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
     objects = models.Manager()

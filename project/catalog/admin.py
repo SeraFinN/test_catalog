@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from testapp.models import Categories, Images, Product
+from catalog.models import Categories, Images, Product
 
 
 class CategoriesAdmin(admin.ModelAdmin):
