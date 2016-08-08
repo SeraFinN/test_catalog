@@ -1,9 +1,12 @@
 from collections import defaultdict
 
+from catalog.models import Categories
 
-def prepare_data(items):
+
+def get_categories_list():
     father_childs = defaultdict(list)
-    for item in items:
+
+    for item in Categories.objects.all():
         values = {'id': item.id, 'parent_id': item.parent_id, 'name': item.name, 'url': item.get_absolute_url()}
         father_childs[values['parent_id']].append(values)
 

@@ -1,6 +1,5 @@
-from catalog.models import Categories
-from catalog.formater import prepare_data
+from catalog.formater import get_categories_list
 
 
 def categories(request):
-    return {"categories_list": prepare_data(Categories.objects.all())}
+    return {"categories_list": get_categories_list()}
