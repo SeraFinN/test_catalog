@@ -1,10 +1,8 @@
 # coding=utf-8
-import random
-import string
 
 from django.http import Http404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404, render_to_response, redirect
+from django.shortcuts import get_object_or_404, render_to_response
 
 from catalog.pagination import get_page
 from catalog.models import Product, Categories
