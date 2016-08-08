@@ -35,13 +35,13 @@ def product_list(request, **params):
         'title': u'Категория - %s' % current_category.name,
         'current_category': current_category,
         'breadcrumbs': current_category.get_breadcrumbs(),
-        'item_list': get_page(products, request.GET.get('page'), 12),
+        'item_list': get_page(products, request.GET.get('page')),
     }
     return render_to_response('product_list.html', context, context_instance=RequestContext(request))
 
 
 def search(request):
-    query = request.GET.get('q', None)
+    query = request.GET.get('q', '')
     user = request.user
     products = Product.released.for_user(user).filter(name__icontains=query) if query else Product.objects.none()
     if not request.user.is_authenticated():

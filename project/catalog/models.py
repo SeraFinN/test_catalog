@@ -70,8 +70,7 @@ class ReleasedProductManager(Manager):
         return super(ReleasedProductManager, self).get_query_set().filter(release_date__lt=datetime.now())
 
     def for_user(self, user):
-        is_authorized = user.is_authenticated()
-        return self.all() if is_authorized else self.exclude(is_hidden=True)
+        return self.all() if user.is_authenticated() else self.exclude(is_hidden=True)
 
 
 class Product(models.Model):

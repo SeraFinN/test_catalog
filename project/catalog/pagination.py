@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 
 
-def get_page(items, page, per_page):
+def get_page(items, page, per_page=12):
     min_page = 1
     paginator = Paginator(items, per_page)
     page = int(page) if page and page.isdigit() else min_page
