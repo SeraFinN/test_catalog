@@ -1,8 +1,8 @@
 # coding=utf-8
 from datetime import datetime
-from django.utils import timezone
 
 from django.db import models
+from django.db.models import Manager
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
@@ -15,10 +15,10 @@ class Images(models.Model):
 
 
 class Categories(models.Model):
-    name = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', blank=True, null=True)
-    slug = models.SlugField(unique=True)
-    default_image = models.ForeignKey(Images, blank=True, null=True)
+    name = models.CharField(max_length=100, verbose_name='Название', )
+    parent = models.ForeignKey('self', blank=True, null=True, verbose_name='Родительская категория')
+    slug = models.SlugField(unique=True, verbose_name='Краткое название')
+    default_image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
     def __unicode__(self):
         return "%s - %s" % (self.id, self.name)
@@ -65,18 +65,30 @@ class Categories(models.Model):
         return breadcrumbs
 
 
+class ReleasedProductManager(Manager):
+    def get_query_set(self):
+        return super(ReleasedProductManager, self).get_query_set().filter(release_date__lt=datetime.now())
+
+    def for_user(self, user):
+        is_authorized = user.is_authenticated()
+        return self.get_query_set() if is_authorized else self.get_query_set().exclude(is_hidden=True)
+
+
 class Product(models.Model):
-    name = models.CharField(max_length=100)
-    category = models.ForeignKey(Categories)
-    count = models.IntegerField()
-    price = models.IntegerField()
-    description = models.TextField()
-    release_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
-    is_hidden = models.BooleanField(default=False)
-    image = models.ForeignKey(Images, blank=True, null=True)
+    name = models.CharField(max_length=100, verbose_name='Название')
+    category = models.ForeignKey(Categories, verbose_name='Категория')
+    count = models.IntegerField(verbose_name='Количество')
+    price = models.IntegerField(verbose_name='Цена')
+    description = models.TextField(verbose_name='Описание')
+    release_date = models.DateTimeField(default=datetime.now, blank=True, null=True, verbose_name='Начало продаж')
+    is_hidden = models.BooleanField(default=False, verbose_name='Только для авторизованных')
+    image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
+
+    objects = models.Manager()
+    released = ReleasedProductManager()
 
     def __unicode__(self):
-        return "%r - %r" % (self.id, self.name)
+        return "%s - %s" % (self.id, self.name)
 
     def get_image(self):
         if not self.image:

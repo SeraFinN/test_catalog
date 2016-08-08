@@ -4,9 +4,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import logout, login
 
-from testapp.views import product_details, main, filldb, ProductsListView, SearchListView, ProductDetail
+from testapp.views import product_details, main, fill_db, product_list, search
 
 admin.autodiscover()
 
@@ -16,14 +16,15 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, sho
 urlpatterns += patterns((),
                         (r'^admin/', include(admin.site.urls)),
                         (r'^login/$',  login, {'template_name': 'login.html',
-                                               'extra_context': {'breadcrumbs': (u"Регистрация", None),
-                                                                 'title': u'Регистрация'}}),
+                                               'extra_context': {'title': u'Авторизация',
+                                                                 'breadcrumbs': [(u'Авторизация', None)]
+                                                                 }}),
                         (r'^logout/$', logout),
                         url(r'^product/(?P<pk>\d+)/?$', product_details, name='product_detail'),
                         (r'^$', main),
-                        (r'^search/$', SearchListView.as_view()),
-                        (r'^filldb/$', filldb),
-                        (r'^(?:(?P<slug>[\w-]+)/)*$', ProductsListView.as_view()),
+                        (r'^search/$', search),
+                        (r'^filldb/$', fill_db),
+                        (r'^(?:(?P<slug>[\w-]+)/)*$', product_list),
                         )
 # from django.contrib import admin
 # admin.autodiscover()
