@@ -1,23 +1,15 @@
 from collections import defaultdict
 
-from django.core.exceptions import ObjectDoesNotExist
-
-from catalog.models import Categories
-
 
 def prepare_data(items):
     father_childs = defaultdict(list)
     for item in items:
-        father_childs[item['parent_id']].append(item)
+        values = {'id': item.id, 'parent_id': item.parent_id, 'name': item.name, 'url': item.get_absolute_url()}
+        father_childs[values['parent_id']].append(values)
 
     def to_list(root, level):
         category_list = []
         for category in sorted(father_childs[root]):
-            try:
-                current_category = Categories.objects.get(id=category['id'])
-            except ObjectDoesNotExist:
-                continue
-            category['url'] = current_category.get_absolute_url()
             category['level'] = level
             category_list.append(category)
             sub_list = to_list(category['id'], level + 1)
