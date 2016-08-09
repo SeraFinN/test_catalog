@@ -17,7 +17,7 @@ urlpatterns += patterns((),
                         (r'^admin/', include(admin.site.urls)),
                         (r'^login/$', login, {'template_name': 'login.html',
                                               'extra_context': {'title': u'Авторизация',
-                                                                'breadcrumbs': [(u'Авторизация', None)]
+                                                                'breadcrumbs': [{'name': u'Авторизация'}]
                                                                 }}),
                         (r'^logout/$', logout),
                         url(r'^product/(?P<pk>\d+)/?$', product_details, name='product_detail'),

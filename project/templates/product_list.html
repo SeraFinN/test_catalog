@@ -1,7 +1,40 @@
 {% extends "sidebar_base.html" %}
 
+{% load list_to_table %}
+{% load add_get_param %}
+
 {% block content %}
     <div id="content">
-        {% include "items.html" %}
+        {% if item_list %}
+            <table>
+                {% for row in item_list|list_to_table %}
+                    <tr>
+                        {% for item in row %}
+                            <td>
+                                {% include "item.html" %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% if item_list.has_other_pages %}
+                <div class="pagination">
+                    {% if item_list.has_previous %}
+                        <a href="?{{ item_list.previous_page_number|add_get_param:request }}">&lt;&lt;&lt;Назад</a>
+                    {% endif %}
+
+                    <span class="current">
+                            {{ item_list.number }} из {{ item_list.paginator.num_pages }}
+                        </span>
+
+                    {% if item_list.has_next %}
+                        <a href="?{{ item_list.next_page_number|add_get_param:request }}">Вперед&gt;&gt;&gt;</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div>Нет элементов</div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -1,5 +1,4 @@
 # coding=utf-8
-
 from django.http import Http404
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
@@ -17,11 +16,11 @@ def main(request):
 
 
 def product_details(request, **params):
-    product = get_object_or_404(Product, id=params['pk'])
+    product = get_object_or_404(Product, pk=params['pk'])
     context = {
         'product': product,
         'title': product.name,
-        'breadcrumbs': product.category.get_breadcrumbs() + [(product.name, None)],
+        'breadcrumbs': product.category.get_breadcrumbs() + [{'name': product.name}],
     }
     return render_to_response('product_details.html', context, context_instance=RequestContext(request))
 
@@ -48,7 +47,7 @@ def search(request):
         products = products.exclude(is_hidden=True)
     context = {
         'title': u'Категория - %s' % u'Поиск: %s' % query,
-        'breadcrumbs': [(u'Поиск: %s' % query, None)],
+        'breadcrumbs': [{'name': u'Поиск: %s' % query}],
         'item_list': get_page(products, request.GET.get('page'), 12),
     }
     return render_to_response('product_list.html', context, context_instance=RequestContext(request))

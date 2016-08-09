@@ -4,9 +4,9 @@
     {% endif %}
     {% for category_link in breadcrumbs %}
         {% if forloop.last %}
-            / {{ category_link.0 }}
+            / {{ category_link.name }}
         {% else %}
-            <a href="{{ category_link.1 }}">/ {{ category_link.0 }}</a>
+            <a href="{{ category_link.url }}">/ {{ category_link.name }}</a>
         {% endif %}
     {% endfor %}
 </div>

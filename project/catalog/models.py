@@ -11,7 +11,7 @@ class Images(models.Model):
     image = models.ImageField(upload_to='pics')
 
     def __unicode__(self):
-        return str(self.id)
+        return str(self.pk)
 
 
 class Categories(models.Model):
@@ -21,10 +21,10 @@ class Categories(models.Model):
     default_image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
     def __unicode__(self):
-        return "%s - %s" % (self.id, self.name)
+        return "%s - %s" % (self.pk, self.name)
 
     def clean(self):
-        if self.id and self.id == self.parent_id:
+        if self.pk and self.pk == self.parent_id:
             raise ValidationError("Category id can't equals category parent id")
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
@@ -39,30 +39,22 @@ class Categories(models.Model):
             return category.default_image
         return self.default_image
 
+    def _get_all_parents(self):
+        category = self
+        parents = []
+        while category:
+            parents.append(category)
+            category = category.parent
+        return parents
+
     def get_absolute_url(self):
-        url = '/'
-        current_category = self
-        while current_category:
-            if current_category.slug:
-                url = '/%s%s' % (current_category.slug, url)
-                current_category = current_category.parent
-        return url
+        return '/%s/' % '/'.join(category.slug for category in reversed(self._get_all_parents()))
 
     def get_level(self):
-        level = 0
-        category = self
-        while category:
-            level += 1
-            category = category.parent
-        return level
+        return len(self._get_all_parents())
 
     def get_breadcrumbs(self):
-        breadcrumbs = []
-        category = self
-        while category:
-            breadcrumbs = [(category.name, category.get_absolute_url(), category.slug)] + breadcrumbs
-            category = category.parent
-        return breadcrumbs
+        return [{'name': x.name, 'url': x.get_absolute_url()} for x in reversed(self._get_all_parents())]
 
 
 class ReleasedProductManager(Manager):
@@ -87,7 +79,7 @@ class Product(models.Model):
     released = ReleasedProductManager()
 
     def __unicode__(self):
-        return "%s - %s" % (self.id, self.name)
+        return "%s - %s" % (self.pk, self.name)
 
     def get_image(self):
         if not self.image:
