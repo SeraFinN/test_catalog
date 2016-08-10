@@ -20,7 +20,6 @@ urlpatterns += patterns((),
                         (r'^product/(?P<pk>\d+)/?$', product_details),
                         (r'^$', main),
                         (r'^search/$', search),
-                        (r'^fill/$', fill_db),
                         (r'^(?:(?P<slug>[\w-]+)/)*$', product_list),
                         )
 # from django.contrib import admin

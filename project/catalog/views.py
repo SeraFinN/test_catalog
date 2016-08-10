@@ -51,18 +51,3 @@ def search(request):
         'item_list': get_page(products, request.GET.get('page'), 12),
     }
     return render_to_response('product_list.html', context, context_instance=RequestContext(request))
-
-
-def fill_db(request):
-    categories = Categories.objects.all()
-    for category in categories:
-        if Product.objects.all().filter(category=category).count() == 0:
-            for i in range(100):
-                description = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.whitespace
-                token = ''.join(random.choice(description) for x in range(1000))
-                name = category.name if not category.parent or u' ' in category.name else u'%s %s' % (category.parent.name, category.name)
-                product = Product(name=u'%s №%s' % (name, i), category=category, image=None, count=1, price=1,
-                                  description=token, is_hidden=bool(random.getrandbits(1))
-                                  )
-                product.save()
-    return redirect('/')
