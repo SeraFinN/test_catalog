@@ -22,11 +22,11 @@ class Categories(models.Model):
     def __init__(self, *args, **kwargs):
         super(Categories, self).__init__(*args, **kwargs)
         self._parents = []
-        self.count = 0
-        self.count_base = 0
-        self.count_url = 0
-        self.count_level = 0
-        self.count_bread = 0
+        # self.count = 0
+        # self.count_base = 0
+        # self.count_url = 0
+        # self.count_level = 0
+        # self.count_bread = 0
 
     def __unicode__(self):
         return "%s - %s" % (self.pk, self.name)
@@ -53,30 +53,30 @@ class Categories(models.Model):
 
     def _get_all_parents(self):
         if self._parents:
-            self.count += 1
-            print "count %s %s" % (self.count, self.slug)
+            # self.count += 1
+            # print "count %s %s" % (self.count, self.slug)
             return self._parents
         category = self
         while category:
             self._parents.append(category)
             category = category.parent
-        self.count_base += 1
-        print "count base %s %s" % (self.count_base, self.slug)
+        # self.count_base += 1
+        # print "count base %s %s" % (self.count_base, self.slug)
         return self._parents
 
     def get_absolute_url(self):
-        self.count_url += 1
-        print "count url %s" % self.count_url
+        # self.count_url += 1
+        # print "count url %s" % self.count_url
         return '/%s/' % '/'.join(category.slug for category in reversed(self._get_all_parents()))
 
     def get_level(self):
-        self.count_level += 1
-        print "count level %s" % self.count_level
+        # self.count_level += 1
+        # print "count level %s" % self.count_level
         return len(self._get_all_parents())
 
     def get_breadcrumbs(self):
-        self.count_bread += 1
-        print "count bread %s" % self.count_bread
+        # self.count_bread += 1
+        # print "count bread %s" % self.count_bread
         return [{'name': x.name, 'url': x.get_absolute_url()} for x in reversed(self._get_all_parents())]
 
 
