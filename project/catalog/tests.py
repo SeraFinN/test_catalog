@@ -10,8 +10,7 @@ from django.test import TestCase
 from django.core.management import call_command
 
 from catalog.models import Categories
-from catalog.formater import get_categories_list, prepare_data
-from catalog.views import product_list
+from catalog.formater import get_categories_list
 
 
 class SimpleTest(TestCase):
@@ -25,10 +24,10 @@ class SimpleTest(TestCase):
         Categories.objects.create(name='intel-notebook', parent=intel, slug='intel-notebook')
         Categories.objects.create(name='amd-notebook', parent=amd, slug='amd-notebook')
         Categories.objects.create(name=u'Видео-карты', parent=None, slug='video-carts')
-        # assert False, Categories.objects.all()
 
     def load_fixture(self):
-        call_command('loaddata', '/home/serafinn/develop/djangoCatalog/project/fixtures.json', commit=False, verbosity=0)
+        call_command('loaddata', '/home/serafinn/develop/djangoCatalog/project/fixtures.json', commit=False,
+                     verbosity=0)
 
     def test_num_queries_fast(self):
         # self.setUp()
@@ -39,13 +38,13 @@ class SimpleTest(TestCase):
             cur = cat
             while cur:
                 cur = cur.parent
-            # list(Categories.objects.all())
+                # list(Categories.objects.all())
 
     def test_num_queries_main(self):
         self.load_fixture()
 
         self.assertNumQueries(0, func=get_categories_list)
 
-    def test_num_queries_old(self):
-        self.load_fixture()
-        self.assertNumQueries(0, func=prepare_data)
+    # def test_num_queries_old(self):
+    #     self.load_fixture()
+    #     self.assertNumQueries(0, func=prepare_data)

@@ -1,10 +1,9 @@
 # coding=utf-8
-from datetime import datetime
-
 from django.db import models
 from django.db.models import Manager
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
 
 
 class Images(models.Model):
@@ -20,8 +19,21 @@ class Categories(models.Model):
     slug = models.SlugField(unique=True, verbose_name='Краткое название')
     default_image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
+    def __init__(self, *args, **kwargs):
+        super(Categories, self).__init__(*args, **kwargs)
+        self._parents = []
+        self.count = 0
+        self.count_base = 0
+        self.count_url = 0
+        self.count_level = 0
+        self.count_bread = 0
+
     def __unicode__(self):
         return "%s - %s" % (self.pk, self.name)
+
+    def save(self, **kwargs):
+        self.slug = slugify(self.slug)
+        super(Categories, self).save(**kwargs)
 
     def clean(self):
         if self.pk and self.pk == self.parent_id:
@@ -40,29 +52,37 @@ class Categories(models.Model):
         return self.default_image
 
     def _get_all_parents(self):
+        if self._parents:
+            self.count += 1
+            print "count %s %s" % (self.count, self.slug)
+            return self._parents
         category = self
-        parents = []
         while category:
-            parents.append(category)
+            self._parents.append(category)
             category = category.parent
-        return parents
+        self.count_base += 1
+        print "count base %s %s" % (self.count_base, self.slug)
+        return self._parents
 
     def get_absolute_url(self):
+        self.count_url += 1
+        print "count url %s" % self.count_url
         return '/%s/' % '/'.join(category.slug for category in reversed(self._get_all_parents()))
 
     def get_level(self):
+        self.count_level += 1
+        print "count level %s" % self.count_level
         return len(self._get_all_parents())
 
     def get_breadcrumbs(self):
+        self.count_bread += 1
+        print "count bread %s" % self.count_bread
         return [{'name': x.name, 'url': x.get_absolute_url()} for x in reversed(self._get_all_parents())]
 
 
 class ReleasedProductManager(Manager):
     def get_query_set(self):
-        return super(ReleasedProductManager, self).get_query_set().filter(release_date__lt=datetime.now())
-
-    def for_user(self, user):
-        return self.all() if user.is_authenticated() else self.exclude(is_hidden=True)
+        return super(ReleasedProductManager, self).get_query_set().exclude(is_hidden=True)
 
 
 class Product(models.Model):
@@ -71,7 +91,6 @@ class Product(models.Model):
     count = models.IntegerField(verbose_name='Количество')
     price = models.IntegerField(verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
-    release_date = models.DateTimeField(default=datetime.now, blank=True, null=True, verbose_name='Начало продаж')
     is_hidden = models.BooleanField(default=False, verbose_name='Cкрыть на сайте')
     image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
