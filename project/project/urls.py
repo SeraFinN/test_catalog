@@ -3,10 +3,10 @@ from django.contrib import admin
 from django.contrib.auth.views import logout, login
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include
 from django.conf.urls.static import static
 
-from catalog.views import product_details, main, product_list, search, fill_db
+from catalog.views import product_details, main, product_list, search
 
 admin.autodiscover()
 

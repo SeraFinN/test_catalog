@@ -1,10 +1,7 @@
 # coding=utf-8
-import random
-import string
-
 from django.http import Http404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404, render_to_response, redirect
+from django.shortcuts import get_object_or_404, render_to_response
 
 from catalog.pagination import get_page
 from catalog.models import Product, Categories
@@ -19,6 +16,8 @@ def main(request):
 
 def product_details(request, **params):
     product = get_object_or_404(Product, pk=params['pk'])
+    if not request.user.is_authenticated() and product.is_hidden:
+        raise Http404
     context = {
         'product': product,
         'title': product.name,

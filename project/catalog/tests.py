@@ -14,17 +14,6 @@ from catalog.formater import get_categories_list
 
 
 class SimpleTest(TestCase):
-    def setUp(self):
-        mon = Categories.objects.create(name=u'Мониторы', parent=None, slug='monitors')
-        Categories.objects.create(name='19', parent=mon, slug='19')
-        Categories.objects.create(name='21', parent=mon, slug='21')
-        cpu = Categories.objects.create(name=u'Процессоры', parent=None, slug='cpu')
-        intel = Categories.objects.create(name='intel', parent=cpu, slug='intel')
-        amd = Categories.objects.create(name='amd', parent=cpu, slug='amd')
-        Categories.objects.create(name='intel-notebook', parent=intel, slug='intel-notebook')
-        Categories.objects.create(name='amd-notebook', parent=amd, slug='amd-notebook')
-        Categories.objects.create(name=u'Видео-карты', parent=None, slug='video-carts')
-
     def load_fixture(self):
         call_command('loaddata', '/home/serafinn/develop/djangoCatalog/project/fixtures.json', commit=False,
                      verbosity=0)
