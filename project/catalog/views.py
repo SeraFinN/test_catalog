@@ -15,9 +15,8 @@ def main(request):
 
 
 def product_details(request, **params):
-    product = get_object_or_404(Product, pk=params['pk'])
-    if not request.user.is_authenticated() and product.is_hidden:
-        raise Http404
+    manager = Product.objects if request.user.is_authenticated() else Product.released
+    product = get_object_or_404(manager, pk=params['pk'])
     context = {
         'product': product,
         'title': product.name,
@@ -30,20 +29,20 @@ def product_list(request, **params):
     category = get_object_or_404(Categories, slug=params.get('slug').lower())
     if request.path.lower() != category.get_absolute_url():
         raise Http404
-    products = Product.objects if request.user.is_authenticated() else Product.released
+    manager = Product.objects if request.user.is_authenticated() else Product.released
     context = {
         'title': u'Категория - %s' % category.name,
         'current_category': category,
         'breadcrumbs': category.get_breadcrumbs(),
-        'item_list': get_page(products.filter(category=category), request.GET.get('page')),
+        'item_list': get_page(manager.filter(category=category), request.GET.get('page')),
     }
     return render_to_response('product_list.html', context, context_instance=RequestContext(request))
 
 
 def search(request):
     query = request.GET.get('q', '')
-    products = Product.objects if request.user.is_authenticated() else Product.released
-    products = products.filter(name__icontains=query) if query else Product.objects.none()
+    manager = Product.objects if request.user.is_authenticated() else Product.released
+    products = manager.filter(name__icontains=query) if query else manager.none()
     context = {
         'title': u'Поиск: %s' % query,
         'breadcrumbs': [{'name': u'Поиск: %s' % query}],
