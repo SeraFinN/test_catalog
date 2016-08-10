@@ -31,7 +31,7 @@ def product_list(request, **params):
     category = get_object_or_404(Categories, slug=params.get('slug').lower())
     if request.path.lower() != category.get_absolute_url():
         raise Http404
-    products = Product.objects.all() if request.user.is_authenticated() else Product.released.all()
+    products = Product.objects if request.user.is_authenticated() else Product.released
     context = {
         'title': u'Категория - %s' % category.name,
         'current_category': category,
@@ -43,7 +43,7 @@ def product_list(request, **params):
 
 def search(request):
     query = request.GET.get('q', '')
-    products = Product.objects.all() if request.user.is_authenticated() else Product.released.all()
+    products = Product.objects if request.user.is_authenticated() else Product.released
     products = products.filter(name__icontains=query) if query else Product.objects.none()
     context = {
         'title': u'Поиск: %s' % query,
