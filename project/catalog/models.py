@@ -7,10 +7,10 @@ from django.template.defaultfilters import slugify
 
 
 class Images(models.Model):
-    image = models.ImageField(upload_to='pics')
+    image = models.ImageField(upload_to='pics', verbose_name='Изображение')
 
     def __unicode__(self):
-        return str(self.pk)
+        return "%s - %s" % (self.pk, self.image)
 
 
 class Categories(models.Model):
@@ -18,10 +18,6 @@ class Categories(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True, verbose_name='Родительская категория')
     slug = models.SlugField(unique=True, verbose_name='Краткое название')
     default_image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
-
-    def __init__(self, *args, **kwargs):
-        super(Categories, self).__init__(*args, **kwargs)
-        self._parents = []
 
     def __unicode__(self):
         return "%s - %s" % (self.pk, self.name)
@@ -46,23 +42,30 @@ class Categories(models.Model):
             return category.default_image
         return self.default_image
 
-    def _get_all_parents(self):
-        if self._parents:
-            return self._parents
-        category = self
-        while category:
-            self._parents.append(category)
-            category = category.parent
-        return self._parents
-
     def get_absolute_url(self):
-        return '/%s/' % '/'.join(category.slug for category in reversed(self._get_all_parents()))
+        url = '/'
+        current_category = self
+        while current_category:
+            if current_category.slug:
+                url = '/%s%s' % (current_category.slug, url)
+                current_category = current_category.parent
+        return url
 
     def get_level(self):
-        return len(self._get_all_parents())
+        level = 0
+        category = self
+        while category:
+            level += 1
+            category = category.parent
+        return level
 
     def get_breadcrumbs(self):
-        return [{'name': x.name, 'url': x.get_absolute_url()} for x in reversed(self._get_all_parents())]
+        breadcrumbs = []
+        category = self
+        while category:
+            breadcrumbs = [{'name': category.name, 'url': category.get_absolute_url()}] + breadcrumbs
+            category = category.parent
+        return breadcrumbs
 
 
 class ReleasedProductManager(Manager):
@@ -91,4 +94,4 @@ class Product(models.Model):
         return self.image
 
     def get_absolute_url(self):
-        return reverse("product_detail", args=[self.id])
+        return reverse("catalog.views.product_details", args=[self.id])

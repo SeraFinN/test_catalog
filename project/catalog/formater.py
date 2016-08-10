@@ -11,7 +11,7 @@ def get_categories_list():
 
     def to_list(root):
         category_list = []
-        for category in sorted(father_childs[root], key=lambda obj: obj.name):
+        for category in sorted(father_childs[root], key=lambda obj: (len(obj.name), obj.name)):
             category_list.append(category)
             sub_list = to_list(category.pk)
             if sub_list:

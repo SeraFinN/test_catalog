@@ -13,9 +13,8 @@ from catalog.models import Product, Categories
 def main(request):
     context = {
         'title': u'Электронный каталог',
-        'breadcrumbs': None,
     }
-    return render_to_response('product_list.html', context, context_instance=RequestContext(request))
+    return render_to_response('sidebar_base.html', context, context_instance=RequestContext(request))
 
 
 def product_details(request, **params):
@@ -29,22 +28,21 @@ def product_details(request, **params):
 
 
 def product_list(request, **params):
-    current_category = get_object_or_404(Categories, slug=params.get('slug'))
-    if request.path != current_category.get_absolute_url():
+    category = get_object_or_404(Categories, slug=params.get('slug').lower())
+    if request.path.lower() != category.get_absolute_url():
         raise Http404
     products = Product.objects.all() if request.user.is_authenticated() else Product.released.all()
     context = {
-        'title': u'Категория - %s' % current_category.name,
-        'current_category': current_category,
-        'breadcrumbs': current_category.get_breadcrumbs(),
-        'item_list': get_page(products.filter(category=current_category), request.GET.get('page')),
+        'title': u'Категория - %s' % category.name,
+        'current_category': category,
+        'breadcrumbs': category.get_breadcrumbs(),
+        'item_list': get_page(products.filter(category=category), request.GET.get('page')),
     }
     return render_to_response('product_list.html', context, context_instance=RequestContext(request))
 
 
 def search(request):
     query = request.GET.get('q', '')
-    user = request.user
     products = Product.objects.all() if request.user.is_authenticated() else Product.released.all()
     products = products.filter(name__icontains=query) if query else Product.objects.none()
     context = {
@@ -60,9 +58,10 @@ def fill_db(request):
     for category in categories:
         if Product.objects.all().filter(category=category).count() == 0:
             for i in range(100):
-                description_source = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.whitespace
-                token = ''.join(random.choice(description_source) for x in range(1000))
-                product = Product(name='%s %s' % (category, i), category=category, image=None, count=1, price=1,
+                description = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.whitespace
+                token = ''.join(random.choice(description) for x in range(1000))
+                name = category.name if not category.parent or u' ' in category.name else u'%s %s' % (category.parent.name, category.name)
+                product = Product(name=u'%s №%s' % (name, i), category=category, image=None, count=1, price=1,
                                   description=token, is_hidden=bool(random.getrandbits(1))
                                   )
                 product.save()

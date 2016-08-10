@@ -1,12 +1,12 @@
-<div class="breadcrumbs">
-    {% if breadcrumbs %}
+{% if breadcrumbs %}
+    <div class="breadcrumbs">
         <a href="/">Главная</a>
-    {% endif %}
-    {% for category_link in breadcrumbs %}
-        {% if forloop.last %}
-            / {{ category_link.name }}
-        {% else %}
-            <a href="{{ category_link.url }}">/ {{ category_link.name }}</a>
-        {% endif %}
-    {% endfor %}
-</div>
+        {% for category_link in breadcrumbs %}
+            {% if forloop.last %}
+                / {{ category_link.name }}
+            {% else %}
+                <a href="{{ category_link.url }}">/ {{ category_link.name }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
