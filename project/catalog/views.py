@@ -8,9 +8,7 @@ from catalog.models import Product, Categories
 
 
 def main(request):
-    context = {
-        'title': u'Электронный каталог',
-    }
+    context = {'title': u'Электронный каталог'}
     return render_to_response('sidebar_base.html', context, context_instance=RequestContext(request))
 
 
