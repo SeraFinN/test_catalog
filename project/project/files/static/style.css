@@ -18,7 +18,6 @@ html, body {
 }
 
 .breadcrumbs {
-    /*border: dashed 1px;*/
     position: relative;
     width: 100%;
 }
@@ -38,8 +37,7 @@ html, body {
 }
 
 #content {
-    /*border: dashed 1px;*/
-    height: 100%;
+    word-break: break-all;
 }
 
 .item_product {
