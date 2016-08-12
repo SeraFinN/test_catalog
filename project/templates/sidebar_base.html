@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 
 {% load level_to_gt %}
+{% load cache %}
+
 
 {% block sidebar %}
+{#    {% cache 500 sidebar request.path %}#}
     <div id="sidebar">
         <div class='nav'>
-            <i>Категории:<br /></i>
+            <i>Категории:<br/></i>
             {% for category in categories_list %}
-                {% ifequal category.id current_category.id  %}
-                    {{ category.get_level|level_to_gt }}{{ category.name }}<br />
+                {% ifequal category.id current_category.id %}
+                    {{ category.get_level|level_to_gt }}{{ category.name }}<br/>
                 {% else %}
-                    {{ category.get_level|level_to_gt }}<a href={{ category.get_absolute_url }}>{{ category.name }}</a><br />
+                    {{ category.get_level|level_to_gt }}
+                    <a href={{ category.get_absolute_url }}>{{ category.name }}</a><br/>
                 {% endifequal %}
             {% endfor %}
         </div>
     </div>
+{#    {% endcache %}#}
 {% endblock %}

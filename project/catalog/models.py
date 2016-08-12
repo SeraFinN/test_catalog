@@ -3,7 +3,10 @@ from django.db import models
 from django.db.models import Manager
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
+from django.dispatch import receiver
+from django.core.cache import cache
 from django.template.defaultfilters import slugify
+from django.db.models.signals import post_save, post_delete
 
 
 class Images(models.Model):
@@ -28,7 +31,7 @@ class Categories(models.Model):
 
     def clean(self):
         if self.pk and self.pk == self.parent_id:
-            raise ValidationError("Category id can't equals category parent id")
+            raise ValidationError('Category id can\'t equals category parent id')
         if self.get_level() > 3:
             raise ValidationError('Max level for subcategories is 3')
         if not self.parent and not self.default_image:
@@ -79,7 +82,7 @@ class Product(models.Model):
     count = models.IntegerField(verbose_name='Количество')
     price = models.IntegerField(verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
-    is_hidden = models.BooleanField(default=False, verbose_name='Cкрыть на сайте')
+    is_hidden = models.BooleanField(default=False, verbose_name='Скрыть на сайте')
     image = models.ForeignKey(Images, blank=True, null=True, verbose_name='Изображение')
 
     objects = models.Manager()
@@ -95,3 +98,20 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("catalog.views.product_details", args=[self.id])
+
+
+@receiver(post_save, sender=Categories)
+@receiver(post_delete, sender=Categories)
+def invalidate_cache(sender, **kwargs):
+    cache.delete(Categories.__name__)
+    # cache.clear()
+
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+
+@receiver(user_logged_in)
+@receiver(user_logged_out)
+def test(sender, **kwargs):
+    # assert False, sender
+    # assert False, 'ddd'
+    # cache.clear()
+    pass

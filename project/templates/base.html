@@ -5,10 +5,17 @@
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <link href="{% static "style.css" %}" rel="stylesheet"/>
+    <script type="text/javascript" src="{% static "jquery-3.1.0.js" %}"></script>
 </head>
 
 <body>
 <div id="page">
+     <script type="text/javascript">
+         $(document).ready(function(){
+{#             $(".item_product").parent().after("Тест");#}
+{#             alert($("#item_product").hide());#}
+         });
+     </script>
     {% block header %}
         <div id="accounts_info" align="right">
             {% if user.is_authenticated %}
@@ -25,21 +32,18 @@
         </div>
     {% endblock %}
 
-    {% block page %}
 
-        {% block sidebar %}
+    {% block sidebar %}{% endblock %}
+
+    <div id="content">
+        {% block breadcrumbs %}
+            {% include "breadcrumbs.html" %}
         {% endblock %}
 
-        <div id="content">
-            {% block breadcrumbs %}
-                {% include "breadcrumbs.html" %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
 
-            {% block content %}
-            {% endblock %}
-        </div>
-
-    {% endblock %}
 
 </div>
 </body>

@@ -21,6 +21,11 @@ DATABASES = {
     }
 }
 
+# CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+
+CACHE_BACKEND = 'file:///home/serafinn/django_cache.tmp'
+# CACHE_BACKEND = 'locmem:///'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
