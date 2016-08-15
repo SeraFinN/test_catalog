@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.http import Http404
 from django.template import RequestContext
-
+from django.views.decorators.cache import cache_page
 from django.shortcuts import get_object_or_404, render_to_response
 
 from catalog.pagination import get_page
@@ -23,6 +23,7 @@ def product_details(request, **params):
     return render_to_response('product_details.html', context, context_instance=RequestContext(request))
 
 
+@cache_page(900)
 def product_list(request, **params):
     category = get_object_or_404(Categories, slug=params.get('slug').lower())
     if request.path.lower() != category.get_absolute_url():

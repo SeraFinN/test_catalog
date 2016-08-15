@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% load cache %}
 
 <!DOCTYPE html>
 <html>
@@ -37,19 +36,17 @@
         </div>
     {% endblock %}
 
+    {% block sidebar %}
+    {% endblock %}
 
-    {% block sidebar %}{% endblock %}
+    <div class='content'>
+        {% block breadcrumbs %}
+            {% include 'breadcrumbs.html' %}
+        {% endblock %}
 
-    {% cache 86400 'content' user request.GET request.path %}
-        <div class='content'>
-            {% block breadcrumbs %}
-                {% include 'breadcrumbs.html' %}
-            {% endblock %}
-
-            {% block content %}
-            {% endblock %}
-        </div>
-    {% endcache %}
+        {% block content %}
+        {% endblock %}
+    </div>
 
 </div>
 </body>

@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
-{% load level_to_gt cache %}
+{% load level_to_gt %}
 
 {% block sidebar %}
-{#60 * 60 * 24 * 2#}
-    {% cache 172800 'sidebar' request.path %}
     <div class="sidebar">
         <div class='nav'>
             <div class="category_header">Категории:</div>
@@ -18,5 +16,4 @@
             {% endfor %}
         </div>
     </div>
-    {% endcache %}
 {% endblock %}
