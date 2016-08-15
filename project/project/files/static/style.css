@@ -91,3 +91,8 @@ table {
 #pagination {
     text-align: center;
 }
+
+#shuffle {
+    float: right;
+    display: inline;
+}
