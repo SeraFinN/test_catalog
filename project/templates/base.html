@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load cache %}
 
 <!DOCTYPE html>
 <html>
@@ -11,14 +12,15 @@
 
 <body>
 <div id="page">
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#shuffle').click(function () {
                 shuffle($('.item_product'));
             });
         });
-
     </script>
+
     {% block header %}
         <div>
             {% if user.is_authenticated %}
@@ -38,15 +40,16 @@
 
     {% block sidebar %}{% endblock %}
 
-    <div id="content">
-        {% block breadcrumbs %}
-            {% include "breadcrumbs.html" %}
-        {% endblock %}
+    {% cache 86400 content user request.GET request.path %}
+        <div class="content">
+            {% block breadcrumbs %}
+                {% include "breadcrumbs.html" %}
+            {% endblock %}
 
-        {% block content %}
-        {% endblock %}
-    </div>
-
+            {% block content %}
+            {% endblock %}
+        </div>
+    {% endcache %}
 
 </div>
 </body>

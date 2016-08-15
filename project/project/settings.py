@@ -23,7 +23,7 @@ DATABASES = {
 
 # CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
-# CACHE_BACKEND = 'file:///home/serafinn/django_cache.tmp'
+CACHE_BACKEND = 'file:///home/serafinn/django_cache.tmp'
 # CACHE_BACKEND = 'locmem:///'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False

@@ -17,7 +17,7 @@ html, body {
     margin: 10pt;
 }
 
-.logout, .logout {
+.logout, .login {
     text-align: right;
     display: block;
 }
@@ -50,6 +50,16 @@ table {
     width: 100%;
 }
 
+.category_header{
+    margin-bottom: 10pt;
+    font-style: italic;
+}
+
+.auth{
+    text-align: center;
+    display: block;
+}
+
 .sidebar {
     position: relative;
     left: 0;
@@ -66,7 +76,7 @@ table {
     display: block;
 }
 
-#content {
+.content {
     word-break: break-all;
     float: right;
     width: 69%;

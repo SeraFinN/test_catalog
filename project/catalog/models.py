@@ -8,6 +8,8 @@ from django.core.cache import cache
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, post_delete
 
+from local_setting import CATEGORIES_CACHE_NAME
+
 
 class Images(models.Model):
     image = models.ImageField(upload_to='pics', verbose_name='Изображение')
@@ -103,15 +105,4 @@ class Product(models.Model):
 @receiver(post_save, sender=Categories)
 @receiver(post_delete, sender=Categories)
 def invalidate_cache(sender, **kwargs):
-    cache.delete(Categories.__name__)
-    # cache.clear()
-
-from django.contrib.auth.signals import user_logged_in, user_logged_out
-
-@receiver(user_logged_in)
-@receiver(user_logged_out)
-def test(sender, **kwargs):
-    # assert False, sender
-    # assert False, 'ddd'
-    # cache.clear()
-    pass
+    cache.delete(CATEGORIES_CACHE_NAME)
