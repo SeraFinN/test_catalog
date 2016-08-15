@@ -40,7 +40,7 @@
 
     {% block sidebar %}{% endblock %}
 
-    {% cache 86400 content user request.GET request.path %}
+    {% cache 86400 'content' user request.GET request.path %}
         <div class="content">
             {% block breadcrumbs %}
                 {% include "breadcrumbs.html" %}
