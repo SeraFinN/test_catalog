@@ -2,16 +2,10 @@
 
 {% block title %}Авторизация{% endblock %}
 
-<div class="auth">
     {% block content %}
-
-        {#    style="text-align: center;"#}
-
         <form action="/login/?next=/" method="POST">
             {{ form }}
             {% csrf_token %}
             <input type="submit" value="Войти"/>
         </form>
-
     {% endblock %}
-</div>

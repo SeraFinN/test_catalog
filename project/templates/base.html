@@ -5,15 +5,15 @@
 <html>
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    <link href="{% static "style.css" %}" rel="stylesheet"/>
-    <script type="text/javascript" src="{% static "scripts.js" %}"></script>
-    <script type="text/javascript" src="{% static "jquery-3.1.0.js" %}"></script>
+    <link href='{% static 'style.css' %}' rel='stylesheet'/>
+    <script type='text/javascript' src='{% static 'scripts.js' %}'></script>
+    <script type='text/javascript' src='{% static 'jquery-3.1.0.js' %}'></script>
 </head>
 
 <body>
-<div id="page">
+<div id='page'>
 
-    <script type="text/javascript">
+    <script type='text/javascript'>
         $(document).ready(function () {
             $('#shuffle').click(function () {
                 shuffle($('.item_product'));
@@ -24,15 +24,15 @@
     {% block header %}
         <div>
             {% if user.is_authenticated %}
-                <span class="logout">{{ user }}&emsp;<a href="/logout/?next=/">Выход</a></span>
+                <span class='logout'>{{ user }}&emsp;<a href='/logout/?next=/'>Выход</a></span>
             {% else %}
-                <span class="login"><a href="/login/?next=/">Войти</a></span>
+                <span class='login'><a href='/login/?next=/'>Войти</a></span>
             {% endif %}
         </div>
-        <div class="search">
-            <form action="/search/" method="get">
-                <input type="text" name="q" title="Поиск">
-                <input type="submit" value="Search">
+        <div class='search'>
+            <form action='/search/' method='get'>
+                <input type='text' name='q' title='Поиск'>
+                <input type='submit' value='Search'>
             </form>
         </div>
     {% endblock %}
@@ -41,9 +41,9 @@
     {% block sidebar %}{% endblock %}
 
     {% cache 86400 'content' user request.GET request.path %}
-        <div class="content">
+        <div class='content'>
             {% block breadcrumbs %}
-                {% include "breadcrumbs.html" %}
+                {% include 'breadcrumbs.html' %}
             {% endblock %}
 
             {% block content %}

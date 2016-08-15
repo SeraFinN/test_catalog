@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.http import Http404
 from django.template import RequestContext
+
 from django.shortcuts import get_object_or_404, render_to_response
 
 from catalog.pagination import get_page
@@ -13,8 +14,7 @@ def main(request):
 
 
 def product_details(request, **params):
-    products = Product.objects if request.user.is_authenticated() else Product.released
-    product = get_object_or_404(products, pk=params['pk'])
+    product = get_object_or_404(Product.released.for_user(request.user), pk=params['pk'])
     context = {
         'product': product,
         'title': product.name,
@@ -27,7 +27,7 @@ def product_list(request, **params):
     category = get_object_or_404(Categories, slug=params.get('slug').lower())
     if request.path.lower() != category.get_absolute_url():
         raise Http404
-    products = Product.objects if request.user.is_authenticated() else Product.released
+    products = Product.released.for_user(request.user)
     context = {
         'title': u'Категория - %s' % category.name,
         'current_category': category,
@@ -39,7 +39,7 @@ def product_list(request, **params):
 
 def search(request):
     query = request.GET.get('q', '')
-    products = Product.objects if request.user.is_authenticated() else Product.released
+    products = Product.released.for_user(request.user)
     products = products.filter(name__icontains=query) if query else products.none()
     context = {
         'title': u'Поиск: %s' % query,

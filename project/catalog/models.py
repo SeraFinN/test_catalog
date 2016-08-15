@@ -74,8 +74,10 @@ class Categories(models.Model):
 
 
 class ReleasedProductManager(Manager):
-    def get_query_set(self):
-        return super(ReleasedProductManager, self).get_query_set().exclude(is_hidden=True)
+    def for_user(self, user):
+        if not user.is_authenticated():
+            return self.get_query_set().exclude(is_hidden=True)
+        return self.get_query_set()
 
 
 class Product(models.Model):
