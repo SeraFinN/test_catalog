@@ -31,7 +31,7 @@ def main(request):
     return render_to_response('sidebar_base.html', context, context_instance=RequestContext(request))
 
 
-@cache_page(60 * 5)
+# @cache_page(60 * 5)
 def product_details(request, **params):
 
     print 'test  key %s' % get_cache_key(request)
@@ -49,8 +49,8 @@ def product_details(request, **params):
     return render_to_response('product_details.html', context, context_instance=RequestContext(request))
 
 
-@vary_on_headers('User-Agent', 'Cookie')
-@cache_page(60 * 5)
+# @vary_on_headers('User-Agent', 'Cookie')
+# @cache_page(60 * 5)
 def product_list(request, **params):
     # assert False, request.get_full_path()
     print 'test  key %s' % get_cache_key(request)
@@ -84,6 +84,15 @@ def search(request):
 
 
 def test():
+
+    # import hashlib
+    # from django.utils.http import urlquote
+    # args = hashlib.md5(u':'.join([urlquote(resolve_variable(var, context)) for var in self.vary_on]))
+    # cache_key = 'template.cache.%s.%s' % (self.fragment_name, args.hexdigest())
+    # value = cache.get(cache_key)
+
+
+
     cache.get(Categories.__name__)
     print cache.get(Categories.__name__)
     if cache.get(Categories.__name__):

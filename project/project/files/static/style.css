@@ -8,6 +8,34 @@ html, body {
     margin: 0;
 }
 
+.product_name {
+    margin-right: 10pt;
+    float: right;
+}
+
+.product_description {
+    margin: 10pt;
+}
+
+.logout, .logout {
+    text-align: right;
+    display: block;
+}
+
+.product_image > img {
+    width: 20px;
+    height: 20px;
+}
+
+.product_detail > img {
+    width: 100px;
+    height: 100px;
+}
+
+table {
+    width: 100%
+}
+
 #page {
     position: relative;
     border: dashed 1px;
@@ -22,7 +50,7 @@ html, body {
     width: 100%;
 }
 
-#sidebar {
+.sidebar {
     position: relative;
     left: 0;
     border: dashed 1px;
@@ -31,17 +59,21 @@ html, body {
     height: 100%;
 }
 
-#search {
+.search {
     width: 100%;
     border: dashed 1px;
+    text-align: right;
+    display: block;
 }
 
 #content {
     word-break: break-all;
+    float: right;
+    width: 69%;
 }
 
 .item_product {
-    width: 130px;
+    width: 160px;
     height: 100px;
     border: dashed 1px;
 }

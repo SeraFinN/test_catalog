@@ -3,7 +3,7 @@
 {% load list_to_table add_get_param %}
 
 {% block content %}
-    <div id="content">
+    <div id="product_list">
         {% if item_list %}
             <table>
                 {% for row in item_list|list_to_table %}
@@ -32,6 +32,7 @@
                     {% endif %}
                 </div>
             {% endif %}
+            <button id="shuffle" style="float: right; display: inline">Перемешать</button>
         {% else %}
             <div>Нет элементов</div>
         {% endif %}

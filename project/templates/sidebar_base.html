@@ -5,8 +5,8 @@
 
 
 {% block sidebar %}
-{#    {% cache 500 sidebar request.path %}#}
-    <div id="sidebar">
+    {% cache 500 sidebar request.path %}
+    <div class="sidebar">
         <div class='nav'>
             <i>Категории:<br/></i>
             {% for category in categories_list %}

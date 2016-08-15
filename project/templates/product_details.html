@@ -1,15 +1,11 @@
 {% extends "sidebar_base.html" %}
 
 {% block content %}
-    <div id="content">
-        <table border="0">
-            <tr>
-                <td><img src="{{ product.get_image.image.url }}" width="100" height="100"/></td>
-                <td><h1>{{ product.name }}</h1></td>
-            </tr>
-            <tr>
-                <td colspan="2">{{ product.description }}</td>
-            </tr>
-        </table>
+    <div class="product_detail">
+        <img src="{{ product.get_image.image.url }}"/>
+
+        <h1 class="product_name">{{ product.name }}</h1>
+
+        <div class="product_description">{{ product.description }}</div>
     </div>
 {% endblock %}

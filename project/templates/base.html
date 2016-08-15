@@ -5,26 +5,29 @@
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <link href="{% static "style.css" %}" rel="stylesheet"/>
+    <script type="text/javascript" src="{% static "scripts.js" %}"></script>
     <script type="text/javascript" src="{% static "jquery-3.1.0.js" %}"></script>
 </head>
 
 <body>
 <div id="page">
-     <script type="text/javascript">
-         $(document).ready(function(){
-{#             $(".item_product").parent().after("Тест");#}
-{#             alert($("#item_product").hide());#}
-         });
-     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#shuffle').click(function () {
+                shuffle($('.item_product'));
+            });
+        });
+
+    </script>
     {% block header %}
-        <div id="accounts_info" align="right">
+        <div>
             {% if user.is_authenticated %}
-                {{ user }}&emsp;<a href="/logout/?next=/">Выход</a>
+                <span class="logout">{{ user }}&emsp;<a href="/logout/?next=/">Выход</a></span>
             {% else %}
-                <a href="/login/?next=/">Войти</a>
+                <span class="login"><a href="/login/?next=/">Войти</a></span>
             {% endif %}
         </div>
-        <div id="search" align="right">
+        <div class="search">
             <form action="/search/" method="get">
                 <input type="text" name="q" title="Поиск">
                 <input type="submit" value="Search">
